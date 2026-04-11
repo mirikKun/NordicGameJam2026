@@ -21,7 +21,6 @@ namespace Project.Scripts.Grid
         public bool HasBuilding;
         public bool Selected;
 
-        public bool HaveRunningTorch;
         public bool HaveResources;
         public event Action<FieldTile> OnClicked;
 
@@ -54,7 +53,6 @@ namespace Project.Scripts.Grid
             var canBuy = TryBuy(GameplayManager.Instance.gameConfig.MatchstickPlaceCost);
             if (canBuy)
             {
-                _tileUIView.TorchHolder.gameObject.SetActive(true);
                 //Add your logic
             }
             return canBuy;
@@ -126,7 +124,8 @@ namespace Project.Scripts.Grid
                 if (_fireStickDeltaTime >= torchDuration)
                 {
                     _fireStickDeltaTime = torchDuration;
-                    HaveRunningTorch = false;
+                    IsUnderFog = true;
+                    UpdateView();
                 }
             }
 
@@ -176,13 +175,12 @@ namespace Project.Scripts.Grid
             _fireStickDeltaTime = 0f;
             _productionDeltaTime = 0f;
             _consumesDeltaTime = 0f;
-            HaveRunningTorch = true;
         }
 
         public void ResetTorch()
         {
             _fireStickDeltaTime = 0f;
-            HaveRunningTorch = true;
+            UpdateView();
         }
 
         private void OnMouseOver()
@@ -207,8 +205,13 @@ namespace Project.Scripts.Grid
         private void OnMouseDown()
         {
             if (EventSystem.current.IsPointerOverGameObject()) return;
-
+            if (Selected)
+            {
+                ClearSelection();
+                return;
+            }
             Debug.Log($"Mouse Down {_position} {_tileType}");
+            
             _tileUIView.ActionsHolder.gameObject.SetActive(true);
             _tileUIView.Setup(IsUnderFog, HasBuilding);
             OnClicked?.Invoke(this);
@@ -218,6 +221,7 @@ namespace Project.Scripts.Grid
         public void ClearSelection()
         {
             _tileUIView.ActionsHolder.gameObject.SetActive(false);
+            
             Selected = false;
         }
 
@@ -245,10 +249,14 @@ namespace Project.Scripts.Grid
                 _fog.SetActive(true);
                 _buildingMesh.SetActive(false);
                 _biomMesh.SetActive(false);
+                _tileUIView.TorchHolder.gameObject.SetActive(false);
+
             }
             else
             {
                 _fog.SetActive(false);
+                _tileUIView.TorchHolder.gameObject.SetActive(true);
+
                 if (HasBuilding)
                 {
                     _buildingMesh.SetActive(true);
