@@ -34,12 +34,12 @@ MonoBehaviour:
       Amount: 10
     Produces:
       ResourceType: 0
-      Amount: 1
+      Amount: 2
       IntervalSeconds: 3
     Consumes:
       ResourceType: 2
       Amount: 1
-      IntervalSeconds: 5
+      IntervalSeconds: 3
   StoneBuilding:
     BuildingCost:
     - ResourceType: 0
@@ -47,19 +47,19 @@ MonoBehaviour:
     Produces:
       ResourceType: 1
       Amount: 1
-      IntervalSeconds: 5
+      IntervalSeconds: 3
     Consumes:
       ResourceType: 2
       Amount: 1
-      IntervalSeconds: 5
+      IntervalSeconds: 3
   FoodBuilding:
     BuildingCost:
     - ResourceType: 0
       Amount: 10
     Produces:
       ResourceType: 2
-      Amount: 5
-      IntervalSeconds: 5
+      Amount: 3
+      IntervalSeconds: 3
     Consumes:
       ResourceType: 0
       Amount: 0
@@ -75,4 +75,4 @@ MonoBehaviour:
     Consumes:
       ResourceType: 2
       Amount: 1
-      IntervalSeconds: 5
+      IntervalSeconds: 3
