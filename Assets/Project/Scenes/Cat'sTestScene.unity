@@ -1599,6 +1599,11 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
+  HaveRunningTorch: 0
+  HaveResources: 0
+  _fireStickDeltaTime: 0
+  _productionDeltaTime: 0
+  _consumesDeltaTime: 0
 --- !u!4 &752439232
 Transform:
   m_ObjectHideFlags: 0
@@ -2287,6 +2292,11 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
+  HaveRunningTorch: 0
+  HaveResources: 0
+  _fireStickDeltaTime: 0
+  _productionDeltaTime: 0
+  _consumesDeltaTime: 0
 --- !u!4 &1155548675
 Transform:
   m_ObjectHideFlags: 0
@@ -2423,6 +2433,11 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
+  HaveRunningTorch: 0
+  HaveResources: 0
+  _fireStickDeltaTime: 0
+  _productionDeltaTime: 0
+  _consumesDeltaTime: 0
 --- !u!4 &1162717117
 Transform:
   m_ObjectHideFlags: 0
@@ -2930,6 +2945,11 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
+  HaveRunningTorch: 0
+  HaveResources: 0
+  _fireStickDeltaTime: 0
+  _productionDeltaTime: 0
+  _consumesDeltaTime: 0
 --- !u!4 &1805869026
 Transform:
   m_ObjectHideFlags: 0
