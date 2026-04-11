@@ -25,7 +25,7 @@ public class GameplayManager: MonoBehaviour
     public int addResourceAmount = 5;
 
 
-    private void Start()
+    private void Awake()
     {
         Instance = this;
         

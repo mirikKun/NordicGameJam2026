@@ -1,7 +1,4 @@
 
-using UnityEngine;
-
-
 public static class Resources
 {
         public static int woodCount;
