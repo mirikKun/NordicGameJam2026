@@ -1,16 +1,18 @@
+using Project.Scripts.Gameplay.Configs;
+using Project.Scripts.Grid.Config;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class GameplayManager: MonoBehaviour
 {
+    public static GameplayManager Instance;
+    public GameConfig gameConfig;
+    public StartBoardConfig startBoardConfig;
     public TextMeshProUGUI woodAmount;
     public TextMeshProUGUI stoneAmount;
     public TextMeshProUGUI foodAmount;
-
-    public int woodStartingAmount = 0;
-    public int stoneStartingAmount = 0;
-    public int foodStartingAmount = 0;
+    
 
     public Button AddWoodButton;
     public Button AddStoneButton;
@@ -22,21 +24,18 @@ public class GameplayManager: MonoBehaviour
 
     public int addResourceAmount = 5;
 
-    public enum ResourceType
-    {
-        Wood,
-        Stone,
-        Food
-    }
+
     private void Start()
     {
-        Resources.woodCount = woodStartingAmount;
-        Resources.foodCount = foodStartingAmount;
-        Resources.stoneCount = stoneStartingAmount;
+        Instance = this;
+        
+        Resources.woodCount = gameConfig.StartWood.Amount;
+        Resources.foodCount = gameConfig.StartFood.Amount;
+        Resources.stoneCount = gameConfig.StartStone.Amount;
 
-        woodAmount.SetText(woodStartingAmount.ToString());
-        stoneAmount.SetText(stoneStartingAmount.ToString());
-        foodAmount.SetText(foodStartingAmount.ToString());
+        woodAmount.SetText(Resources.woodCount.ToString());
+        foodAmount.SetText(Resources.foodCount.ToString());
+        stoneAmount.SetText(Resources.stoneCount.ToString());
 
         //For testing
         AddWoodButton.onClick.AddListener(() => AddResource(ResourceType.Wood, addResourceAmount));
@@ -46,10 +45,20 @@ public class GameplayManager: MonoBehaviour
         RemoveWoodButton.onClick.AddListener(() => RemoveResource(ResourceType.Wood, addResourceAmount));
         RemoveStoneButton.onClick.AddListener(() => RemoveResource(ResourceType.Stone, addResourceAmount));
         RemoveFoodButton.onClick.AddListener(() => RemoveResource(ResourceType.Food, addResourceAmount));
-
-
     }
+    public ResourceAmount[] GetCurrentTorchRefuelCost(float torchFillPercent)
+    {
+        ResourceAmount[] maxResourceAmounts = GameplayManager.Instance.gameConfig.MatchstickRefuelFullCost;
+        ResourceAmount[] currentResourceAmounts=new ResourceAmount[maxResourceAmounts.Length];
+        for (var i = 0; i < currentResourceAmounts.Length; i++)
+        {
+            var resourceAmount = currentResourceAmounts[i];
+            resourceAmount.ResourceType = maxResourceAmounts[i].ResourceType;
+            resourceAmount.Amount = (int)torchFillPercent*resourceAmount.Amount;
+        }
 
+        return currentResourceAmounts;
+    }
     public void AddResource(ResourceType resource, int amount)
     {
         switch(resource)
@@ -96,7 +105,16 @@ public class GameplayManager: MonoBehaviour
 
         DisplayResources(resource);
     }
-
+    public bool HaveEnoughResource(ResourceType resource, int amount)
+    {
+        return resource switch
+        {
+            ResourceType.Wood => Resources.woodCount >= amount,
+            ResourceType.Stone => Resources.stoneCount >= amount,
+            ResourceType.Food => Resources.foodCount >= amount,
+            _ => false
+        };
+    }
     private void DisplayResources(ResourceType resource)
     {
         switch(resource)
@@ -113,4 +131,11 @@ public class GameplayManager: MonoBehaviour
         }
     }
 
+
+}
+public enum ResourceType
+{
+    Wood,
+    Stone,
+    Food
 }

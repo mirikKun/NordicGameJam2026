@@ -1,11 +1,15 @@
 ﻿using System;
+using Project.Scripts.Gameplay.Configs;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Project.Scripts.Grid.TileUI
 {
     public class TileUIView : MonoBehaviour
-    {
+    {   
+        public RectTransform ActionsHolder;
+        public RectTransform TorchHolder;
+        
         [SerializeField] private FieldTile _fieldTile;
         [SerializeField] private PriceView _prefab;
 
@@ -24,13 +28,16 @@ namespace Project.Scripts.Grid.TileUI
         [SerializeField] private RectTransform _refillTorchRoot;
         [SerializeField] private RectTransform _refillTorchPrice;
         [SerializeField] private Button _refillTorchButton;
-        
+        [Header("Torch")] 
+        [SerializeField] private Image _torch; 
+
 
         [SerializeField] private ResIcon[] _resIcons;
 
+     
     
 
-        private Sprite GetIcon(Res res)
+        private Sprite GetIcon(ResourceType res)
         {
             foreach (ResIcon resIcon in _resIcons)
             {
@@ -59,26 +66,31 @@ namespace Project.Scripts.Grid.TileUI
                 _buildRoot.gameObject.SetActive(false);
                 _refillTorchRoot.gameObject.SetActive(false);
                 
-                CreatePriceView(GetPrice(), _placeTorchPrice);
+                CreatePriceView(GameplayManager.Instance.gameConfig.MatchstickPlaceCost, _placeTorchPrice);
             }
             else
             {
                 _placeTorchRoot.gameObject.SetActive(false);
                 _refillTorchRoot.gameObject.SetActive(true);
-                CreatePriceView(GetPrice(), _refillTorchPrice);
+                CreatePriceView(GameplayManager.Instance.gameConfig.MatchstickRefuelFullCost, _refillTorchPrice);
 
                 _buildRoot.gameObject.SetActive(!hasBuilding);
                 if (!hasBuilding)
                 {
-                    CreatePriceView(GetPrice(), _buildPrice);
+                    CreatePriceView(_fieldTile.BuildingConfig.BuildingCost, _buildPrice);
 
                 }
             }
         }
 
+        public void UpdateTorchBar(float percentage)
+        {
+           // _torch.fillAmount = percentage;
+        }
+
         private void TryPlaceTorch()
         {
-            if (true) //Check condition with resources
+            if (_fieldTile.TryBuyTorch())
             {
                 Debug.Log($"Place torch");
                 _fieldTile.PlaceTorch();
@@ -89,70 +101,47 @@ namespace Project.Scripts.Grid.TileUI
 
         private void TryBuild()
         {
-            if (true) //Check condition with resources
+            if (_fieldTile.TryBuild()) 
             {
                 Debug.Log($"Build");
-
                 _fieldTile.Build();
-
                 _fieldTile.ClearSelection();
             }
         }
 
         private void TryRefillTorch()
         {
-            if (true) //Check condition with resources
+            if (_fieldTile.TryRefillTorch()) //Check condition with resources
             {
                 _fieldTile.ClearSelection();
 
             }
         }
 
-        private void CreatePriceView(Price[] prices, RectTransform parent)
+        private void CreatePriceView(ResourceAmount[] prices, RectTransform parent)
         {
             foreach (Transform child in parent)
                 Destroy(child.gameObject);
 
-            foreach (Price price in prices)
+            foreach (ResourceAmount price in prices)
             {
                 PriceView view = Instantiate(_prefab, parent);
-                Sprite icon = GetIcon(price.ResType);
+                Sprite icon = GetIcon(price.ResourceType);
                 view.Setup(icon, price.Amount);
             }
         }
 
-        public Price[] GetPrice()
-        {
-            //TODO
-            return new Price[]
-            {
-                new Price(Res.wood, 10),
-                new Price(Res.stone, 10),
-            };
-        }
+   
     }
 
-    public class Price
-    {
-        public Res ResType;
-        public int Amount;
 
-        public Price(Res resType, int amount)
-        {
-            ResType = resType;
-            Amount = amount;
-        }
-    }
 
-    public enum Res
-    {
-        stone,
-        wood
-    }
+
     [Serializable]
     public class ResIcon
     {
-        public Res Res;
+        public ResourceType Res;
         public Sprite Icon;
     }
+    
 }
