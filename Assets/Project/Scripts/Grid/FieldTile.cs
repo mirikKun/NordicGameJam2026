@@ -1,6 +1,7 @@
 ﻿using System;
 using Project.Scripts.Grid.TileUI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 namespace Project.Scripts.Grid
 {
@@ -10,14 +11,18 @@ namespace Project.Scripts.Grid
         [SerializeField] private MeshRenderer _buildingMesh;
         [SerializeField] private MeshRenderer _biomMesh;
         [SerializeField] private GameObject _fog;
+        [SerializeField] private GameObject _outline;
 
         [SerializeField] private TileUIView _tileUIView;
         public bool IsUnderFog;
         public bool HasBuilding;
+        public event Action<FieldTile> OnClicked;
 
         private Vector2Int _position;
 
         private TileType _tileType;
+
+        public bool Selected;
         // [SerializeField]  private Material _tileMaterial;
         // [SerializeField] private Material _buildingMaterial;
 
@@ -25,37 +30,80 @@ namespace Project.Scripts.Grid
         public void Setup(Vector2Int position, TileType tileType)
         {
             _position = position;
-            _tileType= tileType;
+            _tileType = tileType;
+            UpdateView();
         }
+
         private void OnMouseOver()
         {
-            Debug.Log($"OnMouseOver {_position} {_tileType}");
+            //Debug.Log($"OnMouseOver {_position} {_tileType}");
         }
-        private void OnMouseEnter()
-        {
-            Debug.Log($" En  OnMouseOver {_position} {_tileType}");
-            _tileUIView.gameObject.SetActive(true);
-            _tileUIView.Setup(IsUnderFog,HasBuilding);
-            
-        }
+
         private void OnMouseExit()
         {
-            Debug.Log($"E OnMouseOver {_position} {_tileType}");
-            _tileUIView.gameObject.SetActive(false);
+            _outline.SetActive(false);
+            // Debug.Log($"E OnMouseOver {_position} {_tileType}");
+        }
 
+        private void OnMouseEnter()
+        {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
+            _outline.SetActive(true);
+            // Debug.Log($" En  OnMouseOver {_position} {_tileType}");
+        }
+
+        private void OnMouseDown()
+        {
+            if (EventSystem.current.IsPointerOverGameObject()) return;
+
+            Debug.Log($"Mouse Down {_position} {_tileType}");
+            _tileUIView.gameObject.SetActive(true);
+            _tileUIView.Setup(IsUnderFog, HasBuilding);
+            OnClicked?.Invoke(this);
+            Selected = true;
+        }
+
+        public void ClearSelection()
+        {
+            _tileUIView.gameObject.SetActive(false);
+            Selected = false;
         }
 
         public void PlaceTorch()
         {
             IsUnderFog = false;
-            _fog.gameObject.SetActive(false);
-            
+            UpdateView();
         }
 
         public void Build()
         {
-            HasBuilding = false;
-            _buildingMesh.gameObject.SetActive(true);
+            HasBuilding = true;
+            UpdateView();
+        }
+
+        public void UpdateView()
+        {
+            if (IsUnderFog)
+            {
+                _fog.SetActive(true);
+                _buildingMesh.gameObject.SetActive(false);
+                _biomMesh.gameObject.SetActive(false);
+            }
+            else
+            {
+                _fog.SetActive(false);
+                if (HasBuilding)
+                {
+                    _buildingMesh.gameObject.SetActive(true);
+                    _biomMesh.gameObject.SetActive(false);
+                }
+                else
+                {
+                    _buildingMesh.gameObject.SetActive(false);
+                    _biomMesh.gameObject.SetActive(true);
+                }
+            }
         }
     }
 }

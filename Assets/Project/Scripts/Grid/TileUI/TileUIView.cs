@@ -80,7 +80,10 @@ namespace Project.Scripts.Grid.TileUI
         {
             if (true) //Check condition with resources
             {
+                Debug.Log($"Place torch");
                 _fieldTile.PlaceTorch();
+                _fieldTile.ClearSelection();
+
             }
         }
 
@@ -88,8 +91,11 @@ namespace Project.Scripts.Grid.TileUI
         {
             if (true) //Check condition with resources
             {
+                Debug.Log($"Build");
+
                 _fieldTile.Build();
 
+                _fieldTile.ClearSelection();
             }
         }
 
@@ -97,6 +103,8 @@ namespace Project.Scripts.Grid.TileUI
         {
             if (true) //Check condition with resources
             {
+                _fieldTile.ClearSelection();
+
             }
         }
 
