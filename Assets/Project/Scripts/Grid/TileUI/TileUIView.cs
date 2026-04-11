@@ -72,7 +72,7 @@ namespace Project.Scripts.Grid.TileUI
             {
                 _placeTorchRoot.gameObject.SetActive(false);
                 _refillTorchRoot.gameObject.SetActive(true);
-                CreatePriceView(GameplayManager.Instance.gameConfig.MatchstickRefuelFullCost, _refillTorchPrice);
+                CreatePriceView( GameplayManager.Instance.GetCurrentTorchRefuelCost(_fieldTile.GetTorchProgress()), _refillTorchPrice);
 
                 _buildRoot.gameObject.SetActive(!hasBuilding);
                 if (!hasBuilding)
@@ -113,6 +113,7 @@ namespace Project.Scripts.Grid.TileUI
         {
             if (_fieldTile.TryRefillTorch()) //Check condition with resources
             {
+                _fieldTile.RefillTorch();
                 _fieldTile.ClearSelection();
 
             }
