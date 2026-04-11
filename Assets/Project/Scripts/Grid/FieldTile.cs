@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Project.Scripts.Gameplay;
 using Project.Scripts.Gameplay.Configs;
 using Project.Scripts.Grid.TileUI;
 using UnityEngine;
@@ -120,15 +121,24 @@ namespace Project.Scripts.Grid
                 _fireStickDeltaTime += deltaTime;
                 float torchDuration = GameplayManager.Instance.gameConfig.MatchStickDuration;
                 _tileUIView.UpdateTorchBar((torchDuration - _fireStickDeltaTime) / torchDuration);
-
+                if (_tileType is TileType.Capital)
+                {
+                    GameplayManager.Instance.LightHouseIndicator.Tick((torchDuration - _fireStickDeltaTime) / torchDuration);
+                }
                 if (_fireStickDeltaTime >= torchDuration)
                 {
                     _fireStickDeltaTime = torchDuration;
                     IsUnderFog = true;
                     UpdateView();
+                    if (_tileType == TileType.Capital)
+                    {
+                        GameplayManager.Instance.FinishGame(GameResult.LoseLighthouseLightWentOut);
+
+                    }
                 }
             }
 
+           
             if (HasBuilding||_tileType is TileType.Capital)
             {
                 bool haveResources = true;
@@ -148,6 +158,10 @@ namespace Project.Scripts.Grid
                         }
                         else
                         {
+                            if (_buildingConfig.Consumes.ResourceType==ResourceType.Food)
+                            {
+                                GameplayManager.Instance.FinishGame(GameResult.LoseNoFood);
+                            }
                             haveResources = false;
                         }
                     }
@@ -240,6 +254,11 @@ namespace Project.Scripts.Grid
         {
             HasBuilding = true;
             UpdateView();
+            if (_tileType == TileType.Capital)
+            {
+                GameplayManager.Instance.FinishGame(GameResult.Win);
+
+            }
         }
 
         public void UpdateView()

@@ -1,14 +1,19 @@
+using Project.Scripts.Animation;
+using Project.Scripts.Gameplay;
 using Project.Scripts.Gameplay.Configs;
 using Project.Scripts.Grid.Config;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameplayManager: MonoBehaviour
 {
     public static GameplayManager Instance;
     public GameConfig gameConfig;
+    public EndOfTheGameBuild EndOfTheGameWindow;
     public StartBoardConfig startBoardConfig;
+    public LightHouseIndicator LightHouseIndicator;
     public TextMeshProUGUI woodAmount;
     public TextMeshProUGUI stoneAmount;
     public TextMeshProUGUI foodAmount;
@@ -21,6 +26,8 @@ public class GameplayManager: MonoBehaviour
     public Button RemoveWoodButton;
     public Button RemoveStoneButton;
     public Button RemoveFoodButton;
+
+    public bool GameInProcess;
 
     public int addResourceAmount = 5;
 
@@ -130,6 +137,18 @@ public class GameplayManager: MonoBehaviour
                 foodAmount.SetText(Resources.foodCount.ToString());
                 break;
         }
+    }
+
+    public void FinishGame(GameResult gameResult)
+    {
+        GameInProcess = false;
+        EndOfTheGameWindow.gameObject.SetActive(true);
+        EndOfTheGameWindow.SetupWindow(gameResult);
+    }
+
+    public void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
 
