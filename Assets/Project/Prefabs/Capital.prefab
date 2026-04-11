@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 183674707870443057}
   - component: {fileID: 3518204384886879806}
   m_Layer: 0
-  m_Name: Biom
+  m_Name: Biome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,7 @@ GameObject:
   - component: {fileID: 5765698966908727287}
   - component: {fileID: 8933403214279023191}
   m_Layer: 0
-  m_Name: Bilding
+  m_Name: Building
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
