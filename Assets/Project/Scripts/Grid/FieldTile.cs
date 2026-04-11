@@ -110,6 +110,12 @@ namespace Project.Scripts.Grid
             TickTimes(Time.deltaTime);
         }
 
+        public float GetTorchProgress()
+        {
+            float torchDuration = GameplayManager.Instance.gameConfig.MatchStickDuration;
+            return (torchDuration - _fireStickDeltaTime) / torchDuration;
+        }
+
         private void TickTimes(float deltaTime)
         {
             if (!IsUnderFog)
@@ -216,6 +222,11 @@ namespace Project.Scripts.Grid
             Selected = false;
         }
 
+        public void RefillTorch()
+        {
+            ResetTorch();
+
+        }
         public void PlaceTorch()
         {
             IsUnderFog = false;

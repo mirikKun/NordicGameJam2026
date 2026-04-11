@@ -52,9 +52,10 @@ public class GameplayManager: MonoBehaviour
         ResourceAmount[] currentResourceAmounts=new ResourceAmount[maxResourceAmounts.Length];
         for (var i = 0; i < currentResourceAmounts.Length; i++)
         {
-            var resourceAmount = currentResourceAmounts[i];
+            var resourceAmount = new ResourceAmount();
             resourceAmount.ResourceType = maxResourceAmounts[i].ResourceType;
-            resourceAmount.Amount = (int)torchFillPercent*resourceAmount.Amount;
+            resourceAmount.Amount = Mathf.CeilToInt((1 - torchFillPercent) * maxResourceAmounts[i].Amount);
+            currentResourceAmounts[i] = resourceAmount;
         }
 
         return currentResourceAmounts;
