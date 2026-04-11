@@ -52,12 +52,23 @@ namespace Project.Scripts.Grid
 
         public bool TryBuyTorch()
         {
-            return TryBuy(GameplayManager.Instance.gameConfig.MatchstickPlaceCost);
+            var canBuy = TryBuy(GameplayManager.Instance.gameConfig.MatchstickPlaceCost);
+            if (canBuy)
+            {
+                _tileUIView.TorchHolder.gameObject.SetActive(true);
+                //Add your logic
+            }
+            return canBuy;
         }
 
         public bool TryBuild()
         {
-            return TryBuy(_buildingConfig.BuildingCost);
+            var canBuy = TryBuy(_buildingConfig.BuildingCost);
+            if (canBuy)
+            {
+                //Add your logic
+            }
+            return canBuy;
         }
 
         public bool TryRefillTorch()
@@ -65,7 +76,12 @@ namespace Project.Scripts.Grid
             float torchFillPercent = 1;
             var currentResourceAmounts = GameplayManager.Instance.GetCurrentTorchRefuelCost(torchFillPercent);
 
-            return TryBuy(currentResourceAmounts);
+            var canBuy = TryBuy(currentResourceAmounts);
+            if (canBuy)
+            {
+                //Add your logic
+            }
+            return canBuy;
         }
 
 
@@ -100,11 +116,12 @@ namespace Project.Scripts.Grid
             {
                 _fireStickDeltaTime += deltaTime;
                 float torchDuration = GameplayManager.Instance.gameConfig.MatchStickDuration;
+                _tileUIView.UpdateTorchBar((torchDuration - _fireStickDeltaTime) / torchDuration);
+
                 if (_fireStickDeltaTime >= torchDuration)
                 {
                     _fireStickDeltaTime = torchDuration;
                     HaveRunningTorch = false;
-                    _tileUIView.UpdateTorchBar((torchDuration - _fireStickDeltaTime) / torchDuration);
                 }
             }
 
@@ -187,7 +204,7 @@ namespace Project.Scripts.Grid
             if (EventSystem.current.IsPointerOverGameObject()) return;
 
             Debug.Log($"Mouse Down {_position} {_tileType}");
-            _tileUIView.gameObject.SetActive(true);
+            _tileUIView.ActionsHolder.gameObject.SetActive(true);
             _tileUIView.Setup(IsUnderFog, HasBuilding);
             OnClicked?.Invoke(this);
             Selected = true;
@@ -195,7 +212,7 @@ namespace Project.Scripts.Grid
 
         public void ClearSelection()
         {
-            _tileUIView.gameObject.SetActive(false);
+            _tileUIView.ActionsHolder.gameObject.SetActive(false);
             Selected = false;
         }
 

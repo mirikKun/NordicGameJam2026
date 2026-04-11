@@ -85,7 +85,7 @@ namespace Project.Scripts.Grid.TileUI
 
         public void UpdateTorchBar(float percentage)
         {
-           // _torch.fillAmount = percentage;
+            _torch.fillAmount = percentage;
         }
 
         private void TryPlaceTorch()
