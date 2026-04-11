@@ -67,7 +67,7 @@ public class GameplayManager: MonoBehaviour
 
         Debug.Log("Resources added");
 
-        DisplayResources(resource, amount);
+        DisplayResources(resource);
     }
 
     public void RemoveResource(ResourceType resource, int amount)
