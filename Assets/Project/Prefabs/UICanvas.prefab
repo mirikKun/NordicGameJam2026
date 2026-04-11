@@ -643,12 +643,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0cbd27cd3909c3489d064932957f365, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayManager
+  gameConfig: {fileID: 11400000, guid: 64b0c7f9e4985a744a7d6897856ca6f9, type: 2}
+  startBoardConfig: {fileID: 11400000, guid: 1615dc139e15d7a42b40f2449cdb53fa, type: 2}
   woodAmount: {fileID: 3283929975918025041}
   stoneAmount: {fileID: 7246462725637353893}
   foodAmount: {fileID: 7632406629953629048}
-  woodStartingAmount: 10
-  stoneStartingAmount: 10
-  foodStartingAmount: 10
   AddWoodButton: {fileID: 1656526248460863296}
   AddStoneButton: {fileID: 2742600685699792284}
   AddFoodButton: {fileID: 3367064499166472015}
