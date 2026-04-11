@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Project.Scripts.Grid
 {
@@ -9,9 +10,22 @@ namespace Project.Scripts.Grid
         [SerializeField] private MeshRenderer _biomMesh;
 
         public bool IsUnderFog;
+
+        private Vector2Int _position;
+
+        private TileType _tileType;
         // [SerializeField]  private Material _tileMaterial;
         // [SerializeField] private Material _buildingMaterial;
 
 
+        public void Setup(Vector2Int position, TileType tileType)
+        {
+            _position = position;
+            _tileType= tileType;
+        }
+        private void OnMouseOver()
+        {
+            Debug.Log($"OnMouseOver {_position} {_tileType}");
+        }
     }
 }

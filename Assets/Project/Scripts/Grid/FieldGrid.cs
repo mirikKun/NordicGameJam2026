@@ -37,6 +37,10 @@ namespace Project.Scripts.Grid
                         x * (_cellSize.x + _cellOffset.x),
                         0f,
                         y * (_cellSize.y + _cellOffset.y)
+                    )-new Vector3(
+                        _gridSize.x/2f * (_cellSize.x + _cellOffset.x),
+                        0f,
+                        _gridSize.y/2f * (_cellSize.y + _cellOffset.y)
                     );
 
                     FieldTile tile = Instantiate(prefab, position, Quaternion.identity, transform);

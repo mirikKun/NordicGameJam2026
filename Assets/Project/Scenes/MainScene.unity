@@ -181,7 +181,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 3.3
+  orthographic size: 2.35
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -206,7 +206,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: -0.12708373, y: 0.86436117, z: -0.272532, w: -0.4030582}
-  m_LocalPosition: {x: 0, y: 0.62, z: 0}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -412,10 +412,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a7dbe7e85980424296b0ab78c4d57b3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.FieldGrid
-  _gridSize: {x: 7, y: 7}
+  _gridSize: {x: 5, y: 5}
   _cellSize: {x: 1, y: 1}
   _cellOffset: {x: 0, y: 0}
-  _capitalPosition: {x: 3, y: 3}
+  _capitalPosition: {x: 2, y: 2}
   _cellTypes:
   - TileType: 0
     FieldTile: {fileID: 6709507223434475975}
@@ -434,7 +434,7 @@ Transform:
   m_GameObject: {fileID: 500701218}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -0, z: -3}
+  m_LocalPosition: {x: 0, y: -0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
