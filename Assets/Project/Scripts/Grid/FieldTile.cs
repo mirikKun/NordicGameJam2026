@@ -1,0 +1,17 @@
+﻿using UnityEngine;
+
+namespace Project.Scripts.Grid
+{
+    public class FieldTile : MonoBehaviour
+    {
+        [SerializeField] private MeshRenderer _tileMesh;
+        [SerializeField] private MeshRenderer _buildingMesh;
+        [SerializeField] private MeshRenderer _biomMesh;
+
+        public bool IsUnderFog;
+        // [SerializeField]  private Material _tileMaterial;
+        // [SerializeField] private Material _buildingMaterial;
+
+
+    }
+}
