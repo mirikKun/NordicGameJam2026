@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MI_Cloud_01
+  m_Name: MI_Cloud_border
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: a03b372d742a7914781040d4e4c21e47, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -50,7 +50,7 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _BaseColor: {r: 0.30427194, g: 0.35060617, b: 0.6981132, a: 1}
-    - _Color: {r: 0.3042719, g: 0.35060614, b: 0.6981132, a: 1}
+    - _BaseColor: {r: 0.102136, g: 0.13229533, b: 0.3584906, a: 1}
+    - _Color: {r: 0.102135964, g: 0.13229528, b: 0.35849056, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
