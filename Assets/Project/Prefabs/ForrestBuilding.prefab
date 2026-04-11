@@ -130,7 +130,12 @@ MonoBehaviour:
   _tileMesh: {fileID: 6712416975716222340}
   _buildingMesh: {fileID: 0}
   _biomMesh: {fileID: 0}
+  _fog: {fileID: 0}
+  _outline: {fileID: 0}
+  _tileUIView: {fileID: 0}
   IsUnderFog: 0
+  HasBuilding: 0
+  Selected: 0
 --- !u!1001 &4367102047172961068
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,6 +199,10 @@ PrefabInstance:
     - target: {fileID: 2174600259274730380, guid: 5c140c8982ab19c48bc40a910a96b835, type: 3}
       propertyPath: m_Name
       value: Sawmill
+      objectReference: {fileID: 0}
+    - target: {fileID: 2174600259274730380, guid: 5c140c8982ab19c48bc40a910a96b835, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

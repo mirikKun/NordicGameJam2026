@@ -106,7 +106,7 @@ namespace Project.Scripts.Grid
             if (x == _capitalPosition.x && y == _capitalPosition.y)
                 return TileType.Capital;
 
-            return TileType.Field;
+            return TileType.Forest;
             TileType[] nonCapital = { TileType.Forest, TileType.Field, TileType.Mountains };
             return nonCapital[Random.Range(0, nonCapital.Length)];
         }

@@ -8,12 +8,13 @@ namespace Project.Scripts.Grid
     public class FieldTile : MonoBehaviour
     {
         [SerializeField] private MeshRenderer _tileMesh;
-        [SerializeField] private MeshRenderer _buildingMesh;
-        [SerializeField] private MeshRenderer _biomMesh;
+        [SerializeField] private GameObject _buildingMesh;
+        [SerializeField] private GameObject _biomMesh;
         [SerializeField] private GameObject _fog;
         [SerializeField] private GameObject _outline;
 
         [SerializeField] private TileUIView _tileUIView;
+        
         public bool IsUnderFog;
         public bool HasBuilding;
         public event Action<FieldTile> OnClicked;
@@ -87,21 +88,21 @@ namespace Project.Scripts.Grid
             if (IsUnderFog)
             {
                 _fog.SetActive(true);
-                _buildingMesh.gameObject.SetActive(false);
-                _biomMesh.gameObject.SetActive(false);
+                _buildingMesh.SetActive(false);
+                _biomMesh.SetActive(false);
             }
             else
             {
                 _fog.SetActive(false);
                 if (HasBuilding)
                 {
-                    _buildingMesh.gameObject.SetActive(true);
-                    _biomMesh.gameObject.SetActive(false);
+                    _buildingMesh.SetActive(true);
+                    _biomMesh.SetActive(true);
                 }
                 else
                 {
-                    _buildingMesh.gameObject.SetActive(false);
-                    _biomMesh.gameObject.SetActive(true);
+                    _buildingMesh.SetActive(false);
+                    _biomMesh.SetActive(true);
                 }
             }
         }

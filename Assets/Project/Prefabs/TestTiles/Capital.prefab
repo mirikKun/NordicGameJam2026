@@ -628,8 +628,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.FieldTile
   _tileMesh: {fileID: 5195766998374375058}
-  _buildingMesh: {fileID: 5765698966908727287}
-  _biomMesh: {fileID: 183674707870443057}
+  _buildingMesh: {fileID: 3989973359438667012}
+  _biomMesh: {fileID: 1197382921361382571}
   _fog: {fileID: 5401051420151463249}
   _outline: {fileID: 5957334319995075605}
   _tileUIView: {fileID: 3212524971586244021}
