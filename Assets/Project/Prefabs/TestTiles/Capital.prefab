@@ -240,6 +240,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f3b9bbfb7782459b9a343de7b17c590f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.TileUI.TileUIView
+  ActionsHolder: {fileID: 0}
+  TorchHolder: {fileID: 0}
   _fieldTile: {fileID: 6947664004445234379}
   _prefab: {fileID: 5144256671816685794, guid: 924e06ccc10213f4ea622cde414244ff, type: 3}
   _placeTorchRoot: {fileID: 547530675366302905}
@@ -251,11 +253,14 @@ MonoBehaviour:
   _refillTorchRoot: {fileID: 6470599661992144089}
   _refillTorchPrice: {fileID: 4251495957134698202}
   _refillTorchButton: {fileID: 8119836797435998779}
+  _torch: {fileID: 0}
   _resIcons:
   - Res: 0
-    Icon: {fileID: 21300000, guid: 79e9a9bef148a724a9dd463cda22bf51, type: 3}
+    Icon: {fileID: 21300000, guid: 8e871df826d78b84096d098293f58977, type: 3}
   - Res: 1
-    Icon: {fileID: 21300000, guid: 32d56410934adf3489c5998a29fed9f1, type: 3}
+    Icon: {fileID: 21300000, guid: be4f734808812654d939126c7399dc82, type: 3}
+  - Res: 2
+    Icon: {fileID: 21300000, guid: 98b418aedc8f4f441888d40ad40bb983, type: 3}
 --- !u!114 &5560383318725826579
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -636,6 +641,11 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
+  HaveRunningTorch: 0
+  HaveResources: 0
+  _fireStickDeltaTime: 0
+  _productionDeltaTime: 0
+  _consumesDeltaTime: 0
 --- !u!1 &2692688436449628679
 GameObject:
   m_ObjectHideFlags: 0

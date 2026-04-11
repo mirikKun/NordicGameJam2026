@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Project.Scripts.Gameplay.Configs;
 using Project.Scripts.Grid.TileUI;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -14,25 +16,151 @@ namespace Project.Scripts.Grid
         [SerializeField] private GameObject _outline;
 
         [SerializeField] private TileUIView _tileUIView;
-        
+
+
         public bool IsUnderFog;
         public bool HasBuilding;
+        public bool Selected;
+
+        public bool HaveRunningTorch;
+        public bool HaveResources;
         public event Action<FieldTile> OnClicked;
 
         private Vector2Int _position;
 
         private TileType _tileType;
 
-        public bool Selected;
-        // [SerializeField]  private Material _tileMaterial;
-        // [SerializeField] private Material _buildingMaterial;
 
+        public float _fireStickDeltaTime;
+
+        public float _productionDeltaTime;
+        public float _consumesDeltaTime;
+        private BuildingConfig _buildingConfig;
+
+        public BuildingConfig BuildingConfig => _buildingConfig;
 
         public void Setup(Vector2Int position, TileType tileType)
         {
             _position = position;
             _tileType = tileType;
+
+            _buildingConfig = GameplayManager.Instance.gameConfig.GetBuildingConfig(_tileType);
+
             UpdateView();
+            ResetTimes();
+        }
+
+        public bool TryBuyTorch()
+        {
+            return TryBuy(GameplayManager.Instance.gameConfig.MatchstickPlaceCost);
+        }
+
+        public bool TryBuild()
+        {
+            return TryBuy(_buildingConfig.BuildingCost);
+        }
+
+        public bool TryRefillTorch()
+        {
+            float torchFillPercent = 1;
+            var currentResourceAmounts = GameplayManager.Instance.GetCurrentTorchRefuelCost(torchFillPercent);
+
+            return TryBuy(currentResourceAmounts);
+        }
+
+
+        private bool TryBuy(ResourceAmount[] resourceAmounts)
+        {
+            bool canBuyTorch = true;
+            foreach (var cost in resourceAmounts)
+            {
+                if (!GameplayManager.Instance.HaveEnoughResource(cost.ResourceType, cost.Amount))
+                {
+                    canBuyTorch = false;
+                    return false;
+                }
+            }
+
+            foreach (var cost in resourceAmounts)
+            {
+                GameplayManager.Instance.RemoveResource(cost.ResourceType, cost.Amount);
+            }
+
+            return true;
+        }
+
+        private void Update()
+        {
+            TickTimes(Time.deltaTime);
+        }
+
+        private void TickTimes(float deltaTime)
+        {
+            if (!IsUnderFog)
+            {
+                _fireStickDeltaTime += deltaTime;
+                float torchDuration = GameplayManager.Instance.gameConfig.MatchStickDuration;
+                if (_fireStickDeltaTime >= torchDuration)
+                {
+                    _fireStickDeltaTime = torchDuration;
+                    HaveRunningTorch = false;
+                    _tileUIView.UpdateTorchBar((torchDuration - _fireStickDeltaTime) / torchDuration);
+                }
+            }
+
+            if (HasBuilding)
+            {
+                bool haveResources = true;
+
+                if (_buildingConfig.Consumes != null)
+                {
+                    _consumesDeltaTime += deltaTime;
+                    if (_consumesDeltaTime > _buildingConfig.Consumes.IntervalSeconds)
+                    {
+                        _consumesDeltaTime = 0;
+
+                        if (GameplayManager.Instance.HaveEnoughResource(_buildingConfig.Consumes.ResourceType,
+                                _buildingConfig.Consumes.Amount))
+                        {
+                            GameplayManager.Instance.RemoveResource(_buildingConfig.Consumes.ResourceType,
+                                _buildingConfig.Consumes.Amount);
+                        }
+                        else
+                        {
+                            haveResources = false;
+                        }
+                    }
+                }
+
+                if (_buildingConfig.Produces != null)
+                {
+                    _productionDeltaTime += deltaTime;
+                    if (_productionDeltaTime > _buildingConfig.Produces.IntervalSeconds)
+                    {
+                        _productionDeltaTime = 0;
+                        if (haveResources)
+                        {
+                            GameplayManager.Instance.AddResource(_buildingConfig.Produces.ResourceType,
+                                _buildingConfig.Produces.Amount);
+                        }
+                    }
+                }
+            }
+        }
+
+
+        private void ResetTimes()
+        {
+            _fireStickDeltaTime = 0f;
+            _productionDeltaTime = 0f;
+            _consumesDeltaTime = 0f;
+            HaveRunningTorch = true;
+        }
+
+        public void ResetTorch()
+        {
+            _fireStickDeltaTime = 0f;
+            HaveRunningTorch = true;
         }
 
         private void OnMouseOver()

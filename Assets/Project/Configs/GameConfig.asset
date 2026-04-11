@@ -1,0 +1,72 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e0315e7089ad44718e6630ffeef63005, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Configs.GameConfig
+  StartWood:
+    ResourceType: 0
+    Amount: 50
+  StartFood:
+    ResourceType: 2
+    Amount: 50
+  StartStone:
+    ResourceType: 1
+    Amount: 0
+  MatchStickDuration: 30
+  MatchstickPlaceCost:
+  - ResourceType: 0
+    Amount: 10
+  MatchstickRefuelFullCost:
+  - ResourceType: 0
+    Amount: 5
+  WoodBuilding:
+    BuildingCost:
+    - ResourceType: 0
+      Amount: 10
+    Produces:
+    - ResourceType: 0
+      Amount: 1
+      IntervalSeconds: 3
+    Consumes:
+    - ResourceType: 2
+      Amount: 1
+      IntervalSeconds: 5
+  StoneBuilding:
+    BuildingCost:
+    - ResourceType: 0
+      Amount: 10
+    Produces:
+    - ResourceType: 1
+      Amount: 1
+      IntervalSeconds: 5
+    Consumes:
+    - ResourceType: 2
+      Amount: 1
+      IntervalSeconds: 5
+  FoodBuilding:
+    BuildingCost:
+    - ResourceType: 0
+      Amount: 10
+    Produces:
+    - ResourceType: 2
+      Amount: 5
+      IntervalSeconds: 5
+    Consumes: []
+  Lighthouse:
+    BuildingCost:
+    - ResourceType: 1
+      Amount: 100
+    Produces: []
+    Consumes:
+    - ResourceType: 2
+      Amount: 1
+      IntervalSeconds: 5
