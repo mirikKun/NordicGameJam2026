@@ -18,6 +18,7 @@ namespace Project.Scripts.Grid
         private void Start()
         {
             CreateGrid();
+            
         }
 
         private void CreateGrid()
@@ -45,6 +46,7 @@ namespace Project.Scripts.Grid
 
                     FieldTile tile = Instantiate(prefab, position, Quaternion.identity, transform);
                     _grid[x, y] = tile;
+                    tile.Setup(new Vector2Int(x, y), type);
                 }
             }
         }

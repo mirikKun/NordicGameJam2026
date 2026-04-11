@@ -1,4 +1,5 @@
 ﻿using System;
+using Project.Scripts.Grid.TileUI;
 using UnityEngine;
 
 namespace Project.Scripts.Grid
@@ -8,8 +9,11 @@ namespace Project.Scripts.Grid
         [SerializeField] private MeshRenderer _tileMesh;
         [SerializeField] private MeshRenderer _buildingMesh;
         [SerializeField] private MeshRenderer _biomMesh;
+        [SerializeField] private GameObject _fog;
 
+        [SerializeField] private TileUIView _tileUIView;
         public bool IsUnderFog;
+        public bool HasBuilding;
 
         private Vector2Int _position;
 
@@ -26,6 +30,32 @@ namespace Project.Scripts.Grid
         private void OnMouseOver()
         {
             Debug.Log($"OnMouseOver {_position} {_tileType}");
+        }
+        private void OnMouseEnter()
+        {
+            Debug.Log($" En  OnMouseOver {_position} {_tileType}");
+            _tileUIView.gameObject.SetActive(true);
+            _tileUIView.Setup(IsUnderFog,HasBuilding);
+            
+        }
+        private void OnMouseExit()
+        {
+            Debug.Log($"E OnMouseOver {_position} {_tileType}");
+            _tileUIView.gameObject.SetActive(false);
+
+        }
+
+        public void PlaceTorch()
+        {
+            IsUnderFog = false;
+            _fog.gameObject.SetActive(false);
+            
+        }
+
+        public void Build()
+        {
+            HasBuilding = false;
+            _buildingMesh.gameObject.SetActive(true);
         }
     }
 }
