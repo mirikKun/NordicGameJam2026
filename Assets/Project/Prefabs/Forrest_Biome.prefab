@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3031861314737507936}
   - component: {fileID: 482117992912458933}
   m_Layer: 0
-  m_Name: ForrestBiome
+  m_Name: Forrest_Biome
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MI_Field_02
+  m_Name: MI_Cloud_border
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_Parent: {fileID: 2100000, guid: a03b372d742a7914781040d4e4c21e47, type: 2}
   m_ModifiedSerializedProperties: 0
@@ -40,17 +40,17 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: cda2eea15a60d2b4ca339bd332592f41, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85634c390aa8e7347b16a84139b95760, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: cda2eea15a60d2b4ca339bd332592f41, type: 3}
+        m_Texture: {fileID: 2800000, guid: 85634c390aa8e7347b16a84139b95760, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - _BaseColor: {r: 0.25490198, g: 0.29411766, b: 0.5882353, a: 1}
-    - _Color: {r: 0.25490195, g: 0.29411763, b: 0.5882353, a: 1}
+    - _BaseColor: {r: 0.102136, g: 0.13229533, b: 0.3584906, a: 1}
+    - _Color: {r: 0.102135964, g: 0.13229528, b: 0.35849056, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
