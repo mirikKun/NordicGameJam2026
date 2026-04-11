@@ -66,10 +66,7 @@ namespace Project.Scripts.Grid
             {
                 if (selectedTile == tile)
                 {
-                    if (selectedTile.Selected)
-                    {
-                        tile.ClearSelection();
-                    }
+                   
                 }
                 else
                 {
