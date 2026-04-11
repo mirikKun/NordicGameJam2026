@@ -9,7 +9,6 @@ namespace Project.Scripts.Grid
 {
     public class FieldTile : MonoBehaviour
     {
-        [SerializeField] private MeshRenderer _tileMesh;
         [SerializeField] private GameObject _buildingMesh;
         [SerializeField] private GameObject _biomMesh;
         [SerializeField] private GameObject _fog;
@@ -28,7 +27,7 @@ namespace Project.Scripts.Grid
 
         private Vector2Int _position;
 
-        private TileType _tileType;
+        private TileType _tileType=TileType.Forest;
 
 
         public float _fireStickDeltaTime;
@@ -131,14 +130,14 @@ namespace Project.Scripts.Grid
                 }
             }
 
-            if (HasBuilding)
+            if (HasBuilding||_tileType is TileType.Capital)
             {
                 bool haveResources = true;
 
                 if (_buildingConfig.Consumes != null)
                 {
                     _consumesDeltaTime += deltaTime;
-                    if (_consumesDeltaTime > _buildingConfig.Consumes.IntervalSeconds)
+                    if (_consumesDeltaTime > _buildingConfig.Consumes.IntervalSeconds&&_buildingConfig.Consumes.IntervalSeconds>0)
                     {
                         _consumesDeltaTime = 0;
 
@@ -158,7 +157,7 @@ namespace Project.Scripts.Grid
                 if (_buildingConfig.Produces != null)
                 {
                     _productionDeltaTime += deltaTime;
-                    if (_productionDeltaTime > _buildingConfig.Produces.IntervalSeconds)
+                    if (_productionDeltaTime > _buildingConfig.Produces.IntervalSeconds&&_buildingConfig.Produces.IntervalSeconds>0)
                     {
                         _productionDeltaTime = 0;
                         if (haveResources)
