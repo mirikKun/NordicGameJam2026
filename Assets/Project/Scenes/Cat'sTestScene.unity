@@ -1590,7 +1590,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35439259b2f14fb9878fe3d09432294c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.FieldTile
-  _tileMesh: {fileID: 752439233}
   _buildingMesh: {fileID: 894262563}
   _biomMesh: {fileID: 0}
   _fog: {fileID: 0}
@@ -1599,7 +1598,6 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
-  HaveRunningTorch: 0
   HaveResources: 0
   _fireStickDeltaTime: 0
   _productionDeltaTime: 0
@@ -2208,7 +2206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657691005940210704, guid: 2cd5af6b7def1b844b885e208f61135d, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.691
+      value: 4.76
       objectReference: {fileID: 0}
     - target: {fileID: 8657691005940210704, guid: 2cd5af6b7def1b844b885e208f61135d, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2216,7 +2214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8657691005940210704, guid: 2cd5af6b7def1b844b885e208f61135d, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.049
+      value: 1.78
       objectReference: {fileID: 0}
     - target: {fileID: 8657691005940210704, guid: 2cd5af6b7def1b844b885e208f61135d, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2283,7 +2281,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35439259b2f14fb9878fe3d09432294c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.FieldTile
-  _tileMesh: {fileID: 1155548676}
   _buildingMesh: {fileID: 2034816677}
   _biomMesh: {fileID: 0}
   _fog: {fileID: 0}
@@ -2292,7 +2289,6 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
-  HaveRunningTorch: 0
   HaveResources: 0
   _fireStickDeltaTime: 0
   _productionDeltaTime: 0
@@ -2424,7 +2420,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35439259b2f14fb9878fe3d09432294c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.FieldTile
-  _tileMesh: {fileID: 1162717118}
   _buildingMesh: {fileID: 1792005227}
   _biomMesh: {fileID: 0}
   _fog: {fileID: 0}
@@ -2433,7 +2428,6 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
-  HaveRunningTorch: 0
   HaveResources: 0
   _fireStickDeltaTime: 0
   _productionDeltaTime: 0
@@ -2533,6 +2527,63 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1162717115}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1001 &1164737654
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6696591111662822403, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_Name
+      value: Rock_Building
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 6.63
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.32999992
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2.339
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657691005940210704, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 27d169b3b79303f438bf6e10f7f703a9, type: 3}
 --- !u!1001 &1187689374
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2590,6 +2641,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 38970a426c05efb46b59dcf8d1e3ba5b, type: 3}
+--- !u!1001 &1456663723
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4840343551757344256, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_Name
+      value: matchstick
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 7.527
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5628859
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.115
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5217290959383495866, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 7d0cf4fb7ae6367449cebd8ba5b7a674, type: 3}
 --- !u!1001 &1588922949
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2936,7 +3044,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35439259b2f14fb9878fe3d09432294c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.FieldTile
-  _tileMesh: {fileID: 1805869027}
   _buildingMesh: {fileID: 557672355}
   _biomMesh: {fileID: 0}
   _fog: {fileID: 0}
@@ -2945,7 +3052,6 @@ MonoBehaviour:
   IsUnderFog: 0
   HasBuilding: 0
   Selected: 0
-  HaveRunningTorch: 0
   HaveResources: 0
   _fireStickDeltaTime: 0
   _productionDeltaTime: 0
@@ -3525,3 +3631,5 @@ SceneRoots:
   - {fileID: 1154455490}
   - {fileID: 108148021}
   - {fileID: 1187689374}
+  - {fileID: 1164737654}
+  - {fileID: 1456663723}
