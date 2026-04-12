@@ -16,7 +16,9 @@ namespace Project.Scripts.Grid
 
         [SerializeField] private TileUIView _tileUIView;
 
+        [SerializeField] private Animator animator;
 
+        
         public bool IsUnderFog;
         public bool HasBuilding;
         public bool Selected;
@@ -233,6 +235,8 @@ namespace Project.Scripts.Grid
         public void PlaceTorch()
         {
             IsUnderFog = false;
+            animator.SetTrigger("Disperse");
+            Debug.Log("Disperse");
             UpdateView();
         }
 
@@ -246,6 +250,7 @@ namespace Project.Scripts.Grid
         {
             if (IsUnderFog)
             {
+
                 _fog.SetActive(true);
                 _buildingMesh.SetActive(false);
                 _biomMesh.SetActive(false);
@@ -254,7 +259,7 @@ namespace Project.Scripts.Grid
             }
             else
             {
-                _fog.SetActive(false);
+                //_fog.SetActive(false);
                 _tileUIView.TorchHolder.gameObject.SetActive(true);
 
                 if (HasBuilding)
