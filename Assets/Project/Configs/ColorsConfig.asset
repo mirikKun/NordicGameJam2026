@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: ColorsConfig
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Gameplay.Configs.ColorsConfig
   TileColors:
-  - Color: {r: 0.44705886, g: 0.16862746, b: 0, a: 1}
+  - Color: {r: 0.5764706, g: 0.654902, b: 0.84313726, a: 1}
     TileType: 0
-  - Color: {r: 0.8196079, g: 0.4156863, b: 0, a: 1}
+  - Color: {r: 1, g: 0.6627451, b: 0.6784314, a: 1}
     TileType: 1
-  - Color: {r: 0.81568635, g: 0.59607846, b: 0, a: 1}
+  - Color: {r: 0.8352941, g: 0.23529412, b: 0.98039216, a: 1}
     TileType: 2

@@ -804,6 +804,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7243278519678400653}
   - component: {fileID: 8714744099706705289}
+  - component: {fileID: 4840161695818759556}
   m_Layer: 0
   m_Name: Clouds
   m_TagString: Untagged
@@ -855,6 +856,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &4840161695818759556
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7721816526230682131}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e174cf4663c4b9eae4fde0402b333b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Animation.AnimationEventReceiver
 --- !u!1 &8264869082066051293
 GameObject:
   m_ObjectHideFlags: 0

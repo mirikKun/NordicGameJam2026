@@ -1,4 +1,5 @@
 ﻿using System;
+using Project.Scripts.Animation;
 using Project.Scripts.Gameplay;
 using Project.Scripts.Gameplay.Configs;
 using Project.Scripts.Grid.TileUI;
@@ -9,6 +10,8 @@ namespace Project.Scripts.Grid
 {
     public class FieldTile : MonoBehaviour
     {
+        private static readonly int Disperse = Animator.StringToHash("Disperse");
+        private static readonly int Return = Animator.StringToHash("Return");
         [SerializeField] private GameObject _buildingMesh;
         [SerializeField] private GameObject _biomMesh;
         [SerializeField] private GameObject _fog;
@@ -27,6 +30,7 @@ namespace Project.Scripts.Grid
         public event Action<FieldTile> OnClicked;
 
         private Vector2Int _position;
+        private AnimationEventReceiver _receiver;
 
         private TileType _tileType=TileType.Forest;
 
@@ -39,6 +43,11 @@ namespace Project.Scripts.Grid
         private BuildingConfig _buildingConfig;
 
         public BuildingConfig BuildingConfig => _buildingConfig;
+
+        private void Awake()
+        {
+            _receiver=animator.GetComponent<AnimationEventReceiver>();
+        }
 
         public void Setup(Vector2Int position, TileType tileType)
         {
@@ -178,13 +187,7 @@ namespace Project.Scripts.Grid
                 if (_fireStickDeltaTime >= torchDuration)
                 {
                     _fireStickDeltaTime = torchDuration;
-                    IsUnderFog = true;
-                    UpdateView();
-                    if (_tileType == TileType.Capital)
-                    {
-                        GameplayManager.Instance.FinishGame(GameResult.LoseLighthouseLightWentOut);
-
-                    }
+                    ReturnFog();
                 }
             }
         }
@@ -200,8 +203,9 @@ namespace Project.Scripts.Grid
         public void ResetTorch()
         {
             _fireStickDeltaTime = 0f;
-            UpdateView();
+            //UpdateView();
         }
+
         private void OnMouseExit()
         {
             _outline.SetActive(false);
@@ -244,11 +248,42 @@ namespace Project.Scripts.Grid
             ResetTorch();
 
         }
+
         public void PlaceTorch()
         {
             IsUnderFog = false;
-            animator.SetTrigger("Disperse");
             Debug.Log("Disperse");
+            // animator.SetTrigger(Disperse);
+            // UpdateView();
+            StartAnimation(Disperse);
+        }
+
+        private void ReturnFog()
+        {
+            IsUnderFog = true;
+
+            animator.SetTrigger(Return);
+            UpdateView();
+            //StartAnimation(Return);
+            if (_tileType == TileType.Capital)
+            {
+                GameplayManager.Instance.FinishGame(GameResult.LoseLighthouseLightWentOut);
+
+            }
+        }
+
+        private void StartAnimation(int animationHash)
+        {
+            _receiver.Called -= OnEvent;
+
+            animator.SetTrigger(animationHash);
+            _receiver.Called += OnEvent;
+        }
+
+        private void OnEvent()
+        {
+            _receiver.Called -= OnEvent;
+
             UpdateView();
         }
 
@@ -276,7 +311,7 @@ namespace Project.Scripts.Grid
             }
             else
             {
-                //_fog.SetActive(false);
+                _fog.SetActive(false);
                 _tileUIView.TorchHolder.gameObject.SetActive(true);
 
                 if (HasBuilding)
