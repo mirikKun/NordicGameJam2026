@@ -268,6 +268,7 @@ namespace Project.Scripts.Grid
             //Play sfx audio
             PlayAudioClipFromArray(new[] { torch1, torch2 });
 
+            ResetTimes();
             IsUnderFog = false;
             Debug.Log("Disperse");
             // animator.SetTrigger(Disperse);
@@ -278,10 +279,12 @@ namespace Project.Scripts.Grid
         private void ReturnFog()
         {
             IsUnderFog = true;
+
+            // animator.SetTrigger(Return);
+            // UpdateView();
+            StartAnimation(Return);
             PlayAudioClip(burnedOutFire);
-            animator.SetTrigger(Return);
-            UpdateView();
-            //StartAnimation(Return);
+
             if (_tileType == TileType.Capital)
             {
                 GameplayManager.Instance.FinishGame(GameResult.LoseLighthouseLightWentOut);
