@@ -17,5 +17,5 @@ MonoBehaviour:
     TileType: 0
   - Color: {r: 1, g: 0.6627451, b: 0.6784314, a: 1}
     TileType: 1
-  - Color: {r: 0.8352941, g: 0.23529412, b: 0.98039216, a: 1}
+  - Color: {r: 0.78431374, g: 0.4862745, b: 0.85490197, a: 1}
     TileType: 2
