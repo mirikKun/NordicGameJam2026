@@ -127,6 +127,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 500701220}
     m_Modifications:
+    - target: {fileID: 874444221605628577, guid: 8c365e7178192424fa97575938911e8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4080298565418601453, guid: 8c365e7178192424fa97575938911e8c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.17471
@@ -167,6 +171,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5889522001664811777, guid: 8c365e7178192424fa97575938911e8c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6348694171523004503, guid: 8c365e7178192424fa97575938911e8c, type: 3}
       propertyPath: m_Name
       value: ForestTile
@@ -175,6 +183,10 @@ PrefabInstance:
       propertyPath: sfxAudioSource
       value: 
       objectReference: {fileID: 1160750582}
+    - target: {fileID: 8289716229553928247, guid: 8c365e7178192424fa97575938911e8c, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 8289716229553928247, guid: 8c365e7178192424fa97575938911e8c, type: 3}
       propertyPath: m_Resource
       value: 
@@ -5973,6 +5985,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5251740714825797324, guid: 8f0d540886dd0a2488f4c0e9ac67972d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6817702157952547904, guid: 8f0d540886dd0a2488f4c0e9ac67972d, type: 3}
       propertyPath: m_Name
       value: FieldTile Variant
@@ -5981,6 +5997,10 @@ PrefabInstance:
       propertyPath: sfxAudioSource
       value: 
       objectReference: {fileID: 1160750582}
+    - target: {fileID: 7893779512526255457, guid: 8f0d540886dd0a2488f4c0e9ac67972d, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 7893779512526255457, guid: 8f0d540886dd0a2488f4c0e9ac67972d, type: 3}
       propertyPath: m_Resource
       value: 
@@ -6152,10 +6172,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: MountainTile Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 2000456088500224929, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2713739911505306705, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
       propertyPath: sfxAudioSource
       value: 
       objectReference: {fileID: 1160750582}
+    - target: {fileID: 5833080337411779533, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
+      propertyPath: m_Volume
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 5833080337411779533, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
       propertyPath: m_Resource
       value: 
