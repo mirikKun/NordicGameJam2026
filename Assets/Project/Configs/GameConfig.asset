@@ -58,7 +58,7 @@ MonoBehaviour:
       Amount: 10
     Produces:
       ResourceType: 2
-      Amount: 3
+      Amount: 2
       IntervalSeconds: 3
     Consumes:
       ResourceType: 0
@@ -76,3 +76,4 @@ MonoBehaviour:
       ResourceType: 2
       Amount: 1
       IntervalSeconds: 3
+  CanFogDestroyBuildings: 1
