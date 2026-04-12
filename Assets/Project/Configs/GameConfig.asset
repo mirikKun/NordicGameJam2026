@@ -21,7 +21,7 @@ MonoBehaviour:
   StartStone:
     ResourceType: 1
     Amount: 0
-  MatchStickDuration: 10
+  MatchStickDuration: 60
   MatchstickPlaceCost:
   - ResourceType: 0
     Amount: 10
