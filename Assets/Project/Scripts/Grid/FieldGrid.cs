@@ -18,6 +18,7 @@ namespace Project.Scripts.Grid
 
         [SerializeField] private GameObject _fogTiles;
         private FieldTile[,] _grid;
+        public FieldTile[,] Grid => _grid; 
 
         private void Start()
         {
@@ -49,7 +50,7 @@ namespace Project.Scripts.Grid
                         {
                             FieldTile tile = Instantiate(prefab, position, Quaternion.identity, transform);
                             _grid[px, py] = tile;
-                            tile.Setup(new Vector2Int(px, py), type);
+                            tile.Setup(this,new Vector2Int(px, py), type);
                             tile.OnClicked += DeselectOthers;
                         }
                     }

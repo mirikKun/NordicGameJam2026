@@ -47,6 +47,7 @@ namespace Project.Scripts.Grid
         public TileType TileType => _tileType;
         public float _consumesDeltaTime;
         private BuildingConfig _buildingConfig;
+        private FieldGrid _grid;
 
         public BuildingConfig BuildingConfig => _buildingConfig;
 
@@ -55,8 +56,9 @@ namespace Project.Scripts.Grid
             _receiver=animator.GetComponent<AnimationEventReceiver>();
         }
 
-        public void Setup(Vector2Int position, TileType tileType)
+        public void Setup(FieldGrid grid,Vector2Int position, TileType tileType)
         {
+            _grid = grid;
             _position = position;
             _tileType = tileType;
 
@@ -225,7 +227,7 @@ namespace Project.Scripts.Grid
 
         private void OnMouseEnter()
         {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
+            if (EventSystem.current.IsPointerOverGameObject()||!IsCloseToOther()) return;
 
             _outline.SetActive(true);
             // Debug.Log($" En  OnMouseOver {_position} {_tileType}");
@@ -233,7 +235,7 @@ namespace Project.Scripts.Grid
 
         private void OnMouseDown()
         {
-            if (EventSystem.current.IsPointerOverGameObject()) return;
+            if (EventSystem.current.IsPointerOverGameObject()||!IsCloseToOther()) return;
             if (Selected)
             {
                 ClearSelection();
@@ -245,6 +247,31 @@ namespace Project.Scripts.Grid
             _tileUIView.Setup(IsUnderFog, HasBuilding);
             OnClicked?.Invoke(this);
             Selected = true;
+        }
+
+        private bool IsCloseToOther()
+        {
+            if(!IsUnderFog) return true;
+            Vector2Int currentPosition = _position;
+            FieldTile[,] grid = _grid.Grid;
+
+            Vector2Int[] neighbors = {
+                new Vector2Int(currentPosition.x - 1, currentPosition.y),
+                new Vector2Int(currentPosition.x + 1, currentPosition.y),
+                new Vector2Int(currentPosition.x, currentPosition.y - 1),
+                new Vector2Int(currentPosition.x, currentPosition.y + 1)
+            };
+
+            foreach (Vector2Int neighbor in neighbors)
+            {
+                if (neighbor.x < 0 || neighbor.x >= grid.GetLength(0)) continue;
+                if (neighbor.y < 0 || neighbor.y >= grid.GetLength(1)) continue;
+
+                if (!grid[neighbor.x, neighbor.y].IsUnderFog)
+                    return true;
+            }
+
+            return false;
         }
 
         public void ClearSelection()
