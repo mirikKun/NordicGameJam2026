@@ -278,7 +278,7 @@ namespace Project.Scripts.Grid
         private void ReturnFog()
         {
             IsUnderFog = true;
-
+            PlayAudioClip(burnedOutFire);
             animator.SetTrigger(Return);
             UpdateView();
             //StartAnimation(Return);
