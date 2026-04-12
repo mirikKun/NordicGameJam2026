@@ -771,7 +771,7 @@ MonoBehaviour:
     FieldTile: {fileID: 1085075908}
   - TileType: 3
     FieldTile: {fileID: 1402904755}
-  _fogSize: {x: 15, y: 15}
+  _fogSize: {x: 17, y: 17}
   _fogHeightRange: {x: -0.05, y: 0.1}
   _fogTiles: {fileID: 3414561931447428869}
 --- !u!4 &500701220
@@ -6198,7 +6198,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1946458783012905129, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
       propertyPath: m_FillMethod
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2000456088500224929, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
       propertyPath: m_IsActive

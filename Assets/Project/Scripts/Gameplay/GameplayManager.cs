@@ -35,6 +35,7 @@ public class GameplayManager: MonoBehaviour
 
     private void Awake()
     {
+        GameInProcess = true;
         Instance = this;
         
         Resources.woodCount = gameConfig.StartWood.Amount;

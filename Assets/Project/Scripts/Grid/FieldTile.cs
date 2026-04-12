@@ -128,6 +128,7 @@ namespace Project.Scripts.Grid
 
         private void TickTimes(float deltaTime)
         {
+            if(!GameplayManager.Instance.GameInProcess) return;
             TickTorch(deltaTime);
 
 
