@@ -28,6 +28,8 @@ public class GameplayManager: MonoBehaviour
     public Button RemoveStoneButton;
     public Button RemoveFoodButton;
 
+    [SerializeField] private Button quitButton;
+
     public bool GameInProcess;
 
     public int addResourceAmount = 5;
@@ -45,6 +47,9 @@ public class GameplayManager: MonoBehaviour
         foodAmount.SetText(Resources.foodCount.ToString());
         stoneAmount.SetText(Resources.stoneCount.ToString());
 
+        quitButton.onClick.AddListener(() => QuitGame());
+
+
         //For testing
         AddWoodButton.onClick.AddListener(() => AddResource(ResourceType.Wood, addResourceAmount));
         AddStoneButton.onClick.AddListener(() => AddResource(ResourceType.Stone, addResourceAmount));
@@ -53,6 +58,7 @@ public class GameplayManager: MonoBehaviour
         RemoveWoodButton.onClick.AddListener(() => RemoveResource(ResourceType.Wood, addResourceAmount));
         RemoveStoneButton.onClick.AddListener(() => RemoveResource(ResourceType.Stone, addResourceAmount));
         RemoveFoodButton.onClick.AddListener(() => RemoveResource(ResourceType.Food, addResourceAmount));
+
     }
     public ResourceAmount[] GetCurrentTorchRefuelCost(float torchFillPercent)
     {
@@ -152,6 +158,11 @@ public class GameplayManager: MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+    public void QuitGame()
+    {
+        Debug.Log("Quit game");
+        Application.Quit();
+    }
 
 }
 public enum ResourceType
