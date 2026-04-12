@@ -283,6 +283,8 @@ namespace Project.Scripts.Grid
             // animator.SetTrigger(Return);
             // UpdateView();
             StartAnimation(Return);
+            PlayAudioClip(burnedOutFire);
+
             if (_tileType == TileType.Capital)
             {
                 GameplayManager.Instance.FinishGame(GameResult.LoseLighthouseLightWentOut);

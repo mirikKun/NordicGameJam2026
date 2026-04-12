@@ -180,6 +180,10 @@ PrefabInstance:
       value: ForestTile
       objectReference: {fileID: 0}
     - target: {fileID: 7681949071048871867, guid: 8c365e7178192424fa97575938911e8c, type: 3}
+      propertyPath: burnedOutFire
+      value: 
+      objectReference: {fileID: 8300000, guid: 756b6424b03ea694b94f12336902be65, type: 3}
+    - target: {fileID: 7681949071048871867, guid: 8c365e7178192424fa97575938911e8c, type: 3}
       propertyPath: sfxAudioSource
       value: 
       objectReference: {fileID: 1160750582}
@@ -6006,6 +6010,10 @@ PrefabInstance:
       value: FieldTile Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7790527727837563820, guid: 8f0d540886dd0a2488f4c0e9ac67972d, type: 3}
+      propertyPath: burnedOutFire
+      value: 
+      objectReference: {fileID: 8300000, guid: 756b6424b03ea694b94f12336902be65, type: 3}
+    - target: {fileID: 7790527727837563820, guid: 8f0d540886dd0a2488f4c0e9ac67972d, type: 3}
       propertyPath: sfxAudioSource
       value: 
       objectReference: {fileID: 1160750582}
@@ -6188,6 +6196,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2713739911505306705, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
+      propertyPath: burnedOutFire
+      value: 
+      objectReference: {fileID: 8300000, guid: 756b6424b03ea694b94f12336902be65, type: 3}
     - target: {fileID: 2713739911505306705, guid: 311c0a4123841e143867aa3ca7dbd10d, type: 3}
       propertyPath: sfxAudioSource
       value: 
@@ -6598,6 +6610,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5436106514169233558, guid: a3ad8a516d490954aa7483925b405248, type: 3}
+      propertyPath: burnedOutFire
+      value: 
+      objectReference: {fileID: 8300000, guid: 756b6424b03ea694b94f12336902be65, type: 3}
     - target: {fileID: 5436106514169233558, guid: a3ad8a516d490954aa7483925b405248, type: 3}
       propertyPath: sfxAudioSource
       value: 
