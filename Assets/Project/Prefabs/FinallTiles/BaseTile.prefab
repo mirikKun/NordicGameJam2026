@@ -1152,6 +1152,7 @@ MonoBehaviour:
   _fog: {fileID: 2217299435103039988}
   _outline: {fileID: 2001256579952331342}
   _tileUIView: {fileID: 7367860805948669714}
+  animator: {fileID: 6590280494614591217}
   IsUnderFog: 1
   HasBuilding: 0
   Selected: 0
@@ -1829,5 +1830,10 @@ PrefabInstance:
 --- !u!4 &3518748954889970681 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1391760922623426689, guid: d5172f46ba8376441a4c50595a24db66, type: 3}
+  m_PrefabInstance: {fileID: 2559624206061085560}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &6590280494614591217 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 8714744099706705289, guid: d5172f46ba8376441a4c50595a24db66, type: 3}
   m_PrefabInstance: {fileID: 2559624206061085560}
   m_PrefabAsset: {fileID: 0}
