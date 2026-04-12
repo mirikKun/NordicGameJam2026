@@ -303,11 +303,13 @@ namespace Project.Scripts.Grid
         {
             HasBuilding = true;
             UpdateView();
-            
+
             if (_tileType == TileType.Capital)
             {
                 GameplayManager.Instance.FinishGame(GameResult.Win);
             }
+        }
+
         public void PlayAudioClip(AudioClip sfx)
         {
             sfxAudioSource.clip = sfx;
