@@ -17,6 +17,12 @@ namespace Project.Scripts.Grid
         [SerializeField] private TileUIView _tileUIView;
 
         [SerializeField] private Animator animator;
+        [SerializeField] private AudioClip torch1;
+        [SerializeField] private AudioClip torch2;
+        [SerializeField] private AudioClip relightTorch2;
+        [SerializeField] private AudioClip burnedOutFire;
+        [SerializeField] private AudioSource sfxAudioSource;
+
 
         
         public bool IsUnderFog;
@@ -241,11 +247,17 @@ namespace Project.Scripts.Grid
 
         public void RefillTorch()
         {
+            //Play sfx audio
+            PlayAudioClipFromArray(new[] { torch1, torch2 });
+
             ResetTorch();
 
         }
         public void PlaceTorch()
         {
+            //Play sfx audio
+            PlayAudioClipFromArray(new[] { torch1, torch2 });
+
             IsUnderFog = false;
             animator.SetTrigger("Disperse");
             Debug.Log("Disperse");
@@ -261,6 +273,21 @@ namespace Project.Scripts.Grid
             {
                 GameplayManager.Instance.FinishGame(GameResult.Win);
             }
+        public void PlayAudioClip(AudioClip sfx)
+        {
+            sfxAudioSource.clip = sfx;
+            sfxAudioSource.Play();
+
+            //sfxAudioSource.PlayOneShot(sfx);
+        }
+
+        public void PlayAudioClipFromArray(AudioClip[] sfxArray)
+        {
+            int index = UnityEngine.Random.Range(0, sfxArray.Length);
+
+            sfxAudioSource.clip = sfxArray[index];
+            sfxAudioSource.Play();
+            //sfxAudioSource.PlayOneShot(sfxArray[index]);
         }
 
         public void UpdateView()
