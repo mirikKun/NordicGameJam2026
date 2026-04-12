@@ -11,6 +11,7 @@ public class GameplayManager: MonoBehaviour
 {
     public static GameplayManager Instance;
     public GameConfig gameConfig;
+    public ColorsConfig colorsConfig;
     public EndOfTheGameBuild EndOfTheGameWindow;
     public StartBoardConfig startBoardConfig;
     public LightHouseIndicator LightHouseIndicator;

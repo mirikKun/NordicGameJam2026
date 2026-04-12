@@ -5,10 +5,30 @@ namespace Project.Scripts.Animation
 {
     public class ResourceGetAnimation:MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI _textPrefab;
+        [SerializeField] private TextAnimation _textPrefab;
         [SerializeField] private Transform _from;
-        [SerializeField] private Vector3 _offset;
-        [SerializeField] private float _duration;
-        
+        [SerializeField] private Vector3 _randomStartOffset;
+        [SerializeField] private Vector3 _randomEndOffset;
+
+        public void PlayAnimation(string text, Color color)
+        {
+            Vector3 startOffset = new Vector3(
+                Random.Range(-_randomStartOffset.x, _randomStartOffset.x),
+                Random.Range(-_randomStartOffset.y, _randomStartOffset.y),
+                Random.Range(-_randomStartOffset.z, _randomStartOffset.z)
+            );
+
+            Vector3 endOffset = new Vector3(
+                Random.Range(-_randomEndOffset.x, _randomEndOffset.x),
+                Random.Range(-_randomEndOffset.y, _randomEndOffset.y),
+                Random.Range(-_randomEndOffset.z, _randomEndOffset.z)
+            );
+
+            Vector3 from = _from.position + startOffset;
+            Vector3 to = _from.position + endOffset;
+
+            TextAnimation textAnimation = Instantiate(_textPrefab, from, Quaternion.identity, transform);
+            textAnimation.Setup(text, color, from, to);
+        }
     }
 }

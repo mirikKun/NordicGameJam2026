@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Project.Scripts.Gameplay;
 using Project.Scripts.Gameplay.Configs;
 using Project.Scripts.Grid.TileUI;
@@ -35,6 +34,7 @@ namespace Project.Scripts.Grid
         public float _fireStickDeltaTime;
 
         public float _productionDeltaTime;
+        public TileType TileType => _tileType;
         public float _consumesDeltaTime;
         private BuildingConfig _buildingConfig;
 
@@ -54,20 +54,12 @@ namespace Project.Scripts.Grid
         public bool TryBuyTorch()
         {
             var canBuy = TryBuy(GameplayManager.Instance.gameConfig.MatchstickPlaceCost);
-            if (canBuy)
-            {
-                //Add your logic
-            }
             return canBuy;
         }
 
         public bool TryBuild()
         {
             var canBuy = TryBuy(_buildingConfig.BuildingCost);
-            if (canBuy)
-            {
-                //Add your logic
-            }
             return canBuy;
         }
 
@@ -75,13 +67,7 @@ namespace Project.Scripts.Grid
         {
             float torchFillPercent = 1;
             var currentResourceAmounts = GameplayManager.Instance.GetCurrentTorchRefuelCost(torchFillPercent);
-
-            var canBuy = TryBuy(currentResourceAmounts);
-            if (canBuy)
-            {
-                //Add your logic
-            }
-            return canBuy;
+            return TryBuy(currentResourceAmounts);
         }
 
 
@@ -118,6 +104,68 @@ namespace Project.Scripts.Grid
 
         private void TickTimes(float deltaTime)
         {
+            TickTorch(deltaTime);
+
+
+            if (HasBuilding||_tileType is TileType.Capital)
+            {
+                bool haveResources = true;
+
+                haveResources = TickConsumes(deltaTime);
+                TickProduction(deltaTime, haveResources);
+            }
+        }
+
+        private void TickProduction(float deltaTime, bool haveResources)
+        {
+            if (_buildingConfig.Produces != null)
+            {
+                _productionDeltaTime += deltaTime;
+                if (_productionDeltaTime > _buildingConfig.Produces.IntervalSeconds&&_buildingConfig.Produces.IntervalSeconds>0)
+                {
+                    _productionDeltaTime = 0;
+                    if (haveResources)
+                    {
+                        GameplayManager.Instance.AddResource(_buildingConfig.Produces.ResourceType,
+                            _buildingConfig.Produces.Amount);
+                        //_tileUIView.AnimationsHolder.PlayAnimation("+"+_buildingConfig.Produces.Amount,GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Produces.ResourceType));
+                    }
+                }
+            }
+        }
+
+        private bool TickConsumes(float deltaTime)
+        {
+            bool haveResources=true;
+            if (_buildingConfig.Consumes != null)
+            {
+                _consumesDeltaTime += deltaTime;
+                if (_consumesDeltaTime > _buildingConfig.Consumes.IntervalSeconds&&_buildingConfig.Consumes.IntervalSeconds>0)
+                {
+                    _consumesDeltaTime = 0;
+
+                    if (GameplayManager.Instance.HaveEnoughResource(_buildingConfig.Consumes.ResourceType,
+                            _buildingConfig.Consumes.Amount))
+                    {
+                        GameplayManager.Instance.RemoveResource(_buildingConfig.Consumes.ResourceType,
+                            _buildingConfig.Consumes.Amount);
+                    }
+                    else
+                    {
+                        if (_buildingConfig.Consumes.ResourceType==ResourceType.Food)
+                        {
+                            GameplayManager.Instance.FinishGame(GameResult.LoseNoFood);
+                        }
+                        haveResources = false;
+                    }
+                }
+            }
+
+            return haveResources;
+        }
+
+        private void TickTorch(float deltaTime)
+        {
             if (!IsUnderFog)
             {
                 _fireStickDeltaTime += deltaTime;
@@ -139,50 +187,6 @@ namespace Project.Scripts.Grid
                     }
                 }
             }
-
-           
-            if (HasBuilding||_tileType is TileType.Capital)
-            {
-                bool haveResources = true;
-
-                if (_buildingConfig.Consumes != null)
-                {
-                    _consumesDeltaTime += deltaTime;
-                    if (_consumesDeltaTime > _buildingConfig.Consumes.IntervalSeconds&&_buildingConfig.Consumes.IntervalSeconds>0)
-                    {
-                        _consumesDeltaTime = 0;
-
-                        if (GameplayManager.Instance.HaveEnoughResource(_buildingConfig.Consumes.ResourceType,
-                                _buildingConfig.Consumes.Amount))
-                        {
-                            GameplayManager.Instance.RemoveResource(_buildingConfig.Consumes.ResourceType,
-                                _buildingConfig.Consumes.Amount);
-                        }
-                        else
-                        {
-                            if (_buildingConfig.Consumes.ResourceType==ResourceType.Food)
-                            {
-                                GameplayManager.Instance.FinishGame(GameResult.LoseNoFood);
-                            }
-                            haveResources = false;
-                        }
-                    }
-                }
-
-                if (_buildingConfig.Produces != null)
-                {
-                    _productionDeltaTime += deltaTime;
-                    if (_productionDeltaTime > _buildingConfig.Produces.IntervalSeconds&&_buildingConfig.Produces.IntervalSeconds>0)
-                    {
-                        _productionDeltaTime = 0;
-                        if (haveResources)
-                        {
-                            GameplayManager.Instance.AddResource(_buildingConfig.Produces.ResourceType,
-                                _buildingConfig.Produces.Amount);
-                        }
-                    }
-                }
-            }
         }
 
 
@@ -198,12 +202,6 @@ namespace Project.Scripts.Grid
             _fireStickDeltaTime = 0f;
             UpdateView();
         }
-
-        private void OnMouseOver()
-        {
-            //Debug.Log($"OnMouseOver {_position} {_tileType}");
-        }
-
         private void OnMouseExit()
         {
             _outline.SetActive(false);
@@ -258,10 +256,10 @@ namespace Project.Scripts.Grid
         {
             HasBuilding = true;
             UpdateView();
+            
             if (_tileType == TileType.Capital)
             {
                 GameplayManager.Instance.FinishGame(GameResult.Win);
-
             }
         }
 

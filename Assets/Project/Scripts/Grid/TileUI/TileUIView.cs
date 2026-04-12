@@ -1,4 +1,5 @@
 ﻿using System;
+using Project.Scripts.Animation;
 using Project.Scripts.Gameplay.Configs;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,6 +10,7 @@ namespace Project.Scripts.Grid.TileUI
     {   
         public RectTransform ActionsHolder;
         public RectTransform TorchHolder;
+        public ResourceGetAnimation AnimationsHolder;
         
         [SerializeField] private FieldTile _fieldTile;
         [SerializeField] private PriceView _prefab;
@@ -128,7 +130,7 @@ namespace Project.Scripts.Grid.TileUI
             {
                 PriceView view = Instantiate(_prefab, parent);
                 Sprite icon = GetIcon(price.ResourceType);
-                view.Setup(icon, price.Amount);
+                view.Setup(icon, price.Amount,GameplayManager.Instance.colorsConfig.GetTileColor(price.ResourceType));
             }
         }
 
