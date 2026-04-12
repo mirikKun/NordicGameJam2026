@@ -70,8 +70,8 @@ MonoBehaviour:
       Amount: 50
     Produces:
       ResourceType: 0
-      Amount: 0
-      IntervalSeconds: 0
+      Amount: 1
+      IntervalSeconds: 3
     Consumes:
       ResourceType: 2
       Amount: 1
