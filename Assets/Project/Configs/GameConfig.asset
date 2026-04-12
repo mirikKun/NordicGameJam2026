@@ -67,7 +67,7 @@ MonoBehaviour:
   Lighthouse:
     BuildingCost:
     - ResourceType: 1
-      Amount: 100
+      Amount: 50
     Produces:
       ResourceType: 0
       Amount: 0
