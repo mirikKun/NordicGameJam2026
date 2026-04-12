@@ -306,6 +306,8 @@ namespace Project.Scripts.Grid
         private void ReturnFog()
         {
             IsUnderFog = true;
+            if(GameplayManager.Instance.gameConfig.CanFogDestroyBuildings)
+            HasBuilding = false;
 
             // animator.SetTrigger(Return);
             // UpdateView();
