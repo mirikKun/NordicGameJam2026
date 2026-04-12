@@ -62,6 +62,11 @@ namespace Project.Scripts.Grid
 
             _buildingConfig = GameplayManager.Instance.gameConfig.GetBuildingConfig(_tileType);
 
+            if (_tileType is TileType.Capital)
+            {
+                animator.SetTrigger(Disperse);
+
+            }
             UpdateView();
             ResetTimes();
         }

@@ -400,6 +400,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7885384113601753708, guid: 73ce33caeb725424cb56128e24500d39, type: 3}
+      propertyPath: m_Color.b
+      value: 0.24705882
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885384113601753708, guid: 73ce33caeb725424cb56128e24500d39, type: 3}
+      propertyPath: m_Color.g
+      value: 0.121568635
+      objectReference: {fileID: 0}
+    - target: {fileID: 7885384113601753708, guid: 73ce33caeb725424cb56128e24500d39, type: 3}
+      propertyPath: m_Color.r
+      value: 0.15334958
+      objectReference: {fileID: 0}
     - target: {fileID: 8257080268534833121, guid: 73ce33caeb725424cb56128e24500d39, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6540,7 +6552,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 703365206117089829, guid: a3ad8a516d490954aa7483925b405248, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1822563691325015232, guid: a3ad8a516d490954aa7483925b405248, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6584,7 +6596,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3282877665928145993, guid: a3ad8a516d490954aa7483925b405248, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5436106514169233558, guid: a3ad8a516d490954aa7483925b405248, type: 3}
       propertyPath: sfxAudioSource

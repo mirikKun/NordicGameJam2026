@@ -584,7 +584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -1279,7 +1279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Project.Scripts.Grid.FieldTile
   _buildingMesh: {fileID: 2198876246325467185}
   _biomMesh: {fileID: 4835341145710031249}
-  _fog: {fileID: 2217299435103039988}
+  _fog: {fileID: 4217809260571189144}
   _outline: {fileID: 2001256579952331342}
   _tileUIView: {fileID: 7367860805948669714}
   animator: {fileID: 6590280494614591217}
@@ -1577,7 +1577,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
   m_Material: {fileID: 0}
   m_Color: {r: 0.4188679, g: 0.4188679, b: 0.4188679, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
