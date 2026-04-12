@@ -231,7 +231,7 @@ namespace Project.Scripts.Grid
 
         private void OnMouseEnter()
         {
-            if (EventSystem.current.IsPointerOverGameObject()||!IsCloseToOther()) return;
+            if (CanClick()||!IsCloseToOther()) return;
 
             _outline.SetActive(true);
             // Debug.Log($" En  OnMouseOver {_position} {_tileType}");
@@ -239,7 +239,7 @@ namespace Project.Scripts.Grid
 
         private void OnMouseDown()
         {
-            if (EventSystem.current.IsPointerOverGameObject()||!IsCloseToOther()) return;
+            if (CanClick()||!IsCloseToOther()) return;
             if (Selected)
             {
                 ClearSelection();
@@ -251,6 +251,16 @@ namespace Project.Scripts.Grid
             _tileUIView.Setup(IsUnderFog, HasBuilding);
             OnClicked?.Invoke(this);
             Selected = true;
+        }
+
+        private static bool CanClick()
+        {
+            
+                if (Input.touchCount > 0)
+                    return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+    
+                return EventSystem.current.IsPointerOverGameObject();
+            
         }
 
         private bool IsCloseToOther()
