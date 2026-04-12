@@ -12,6 +12,8 @@ namespace Project.Scripts.Grid
     {
         private static readonly int Disperse = Animator.StringToHash("Disperse");
         private static readonly int Return = Animator.StringToHash("Return");
+        
+        
         [SerializeField] private GameObject _buildingMesh;
         [SerializeField] private GameObject _biomMesh;
         [SerializeField] private GameObject _fog;
@@ -150,7 +152,7 @@ namespace Project.Scripts.Grid
                     {
                         GameplayManager.Instance.AddResource(_buildingConfig.Produces.ResourceType,
                             _buildingConfig.Produces.Amount);
-                        //_tileUIView.AnimationsHolder.PlayAnimation("+"+_buildingConfig.Produces.Amount,GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Produces.ResourceType));
+                        _tileUIView.AnimationsHolder.PlayAnimation("+"+_buildingConfig.Produces.Amount,_tileUIView.GetIcon(_buildingConfig.Produces.ResourceType),GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Produces.ResourceType));
                     }
                 }
             }
@@ -171,6 +173,8 @@ namespace Project.Scripts.Grid
                     {
                         GameplayManager.Instance.RemoveResource(_buildingConfig.Consumes.ResourceType,
                             _buildingConfig.Consumes.Amount);
+                        _tileUIView.AnimationsHolder.PlayAnimation("-"+_buildingConfig.Consumes.Amount,_tileUIView.GetIcon(_buildingConfig.Produces.ResourceType),GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Consumes.ResourceType));
+
                     }
                     else
                     {
@@ -307,10 +311,9 @@ namespace Project.Scripts.Grid
         {
             IsUnderFog = true;
             if(GameplayManager.Instance.gameConfig.CanFogDestroyBuildings)
-            HasBuilding = false;
-
-            // animator.SetTrigger(Return);
-            // UpdateView();
+            {
+                HasBuilding = false;
+            }
             StartAnimation(Return);
             PlayAudioClip(burnedOutFire);
 

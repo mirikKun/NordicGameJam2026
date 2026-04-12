@@ -39,7 +39,7 @@ namespace Project.Scripts.Grid.TileUI
      
     
 
-        private Sprite GetIcon(ResourceType res)
+        public Sprite GetIcon(ResourceType res)
         {
             foreach (ResIcon resIcon in _resIcons)
             {

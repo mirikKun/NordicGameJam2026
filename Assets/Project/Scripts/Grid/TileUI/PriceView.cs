@@ -12,7 +12,7 @@ namespace Project.Scripts.Grid.TileUI
         {
             _priceImage.sprite = icon;
             _priceText.text = amount.ToString();
-            _priceText.color = color;
+            //_priceText.color = color;
             _priceImage.color = color;
         }
     }
