@@ -47,6 +47,8 @@ namespace Project.Scripts.Gameplay.Configs
             Consumes =  new ResourceFlow { ResourceType = ResourceType.Food, Amount = 1, IntervalSeconds = 5f } 
         };
 
+        public bool CanFogDestroyBuildings = true;
+
 
         public BuildingConfig GetBuildingConfig(TileType tileType)
         {
