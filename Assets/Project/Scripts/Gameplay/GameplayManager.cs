@@ -1,3 +1,4 @@
+using System;
 using Project.Scripts.Animation;
 using Project.Scripts.Gameplay;
 using Project.Scripts.Gameplay.Configs;
@@ -29,10 +30,12 @@ public class GameplayManager: MonoBehaviour
     public Button RemoveFoodButton;
 
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button restartButton;
 
     public bool GameInProcess;
 
     public int addResourceAmount = 5;
+    public event Action Won;
 
 
     private void Awake()
@@ -48,7 +51,17 @@ public class GameplayManager: MonoBehaviour
         foodAmount.SetText(Resources.foodCount.ToString());
         stoneAmount.SetText(Resources.stoneCount.ToString());
 
+        
+        
+        
+    #if UNITY_WEBGL
+        quitButton.gameObject.SetActive(false);
+    #else
         quitButton.onClick.AddListener(() => QuitGame());
+    #endif        
+        
+        
+        restartButton.onClick.AddListener(() => RestartGame());
 
 
         //For testing
@@ -149,6 +162,10 @@ public class GameplayManager: MonoBehaviour
 
     public void FinishGame(GameResult gameResult)
     {
+        if (gameResult == GameResult.Win)
+        {
+            Won?.Invoke();
+        }
         GameInProcess = false;
         EndOfTheGameWindow.gameObject.SetActive(true);
         EndOfTheGameWindow.SetupWindow(gameResult);

@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,20 +11,50 @@ namespace Project.Scripts.Grid
         [SerializeField] private Vector2 _cellSize = new Vector2(100f, 100f);
         [SerializeField] private Vector2 _cellOffset = new Vector2(100f, 100f);
 
-        [SerializeField] private Vector2Int _capitalPosition = new Vector2Int(5, 5);
 
         [SerializeField] private CellTypes[] _cellTypes;
         [SerializeField] private Vector2Int _fogSize = new Vector2Int(23, 23);
         [SerializeField] private Vector2 _fogHeightRange = new Vector2(-0.2f, 0.4f);
 
         [SerializeField] private GameObject _fogTiles;
+        [SerializeField] private float _finishAnimationMaxDelay = 1.3f;
+
         private FieldTile[,] _grid;
         public FieldTile[,] Grid => _grid; 
 
         private void Start()
         {
             CreateGrid();
+            GameplayManager.Instance.Won += PlayFinishAnimation;
+        }
+
+        private void PlayFinishAnimation()
+        {
+            Vector2Int startPosition = GetCapitalPosition();
+    
+            float maxDistance = 0f;
+            for (int x = 0; x < _grid.GetLength(0); x++)
+            for (int y = 0; y < _grid.GetLength(1); y++)
+                maxDistance = Mathf.Max(maxDistance, Vector2Int.Distance(startPosition, new Vector2Int(x, y)));
+
+            for (int x = 0; x < _grid.GetLength(0); x++)
+            {
+                for (int y = 0; y < _grid.GetLength(1); y++)
+                {
+                    float distance = Vector2Int.Distance(startPosition, new Vector2Int(x, y));
+                    float delay = (distance / maxDistance) * _finishAnimationMaxDelay;
             
+                    FieldTile tile = _grid[x, y];
+                    StartCoroutine(PlayWithDelay(tile, delay));
+                }
+            }
+        }
+
+        private IEnumerator PlayWithDelay(FieldTile tile, float delay)
+        {
+            yield return new WaitForSeconds(delay);
+            if(tile.IsUnderFog)
+            tile.PlaceTorch(false);
         }
 
         private void CreateGrid()
@@ -75,6 +106,18 @@ namespace Project.Scripts.Grid
 
                 }
             }
+        }
+
+        private Vector2Int GetCapitalPosition()
+        {
+            foreach (FieldTile tile in _grid)
+            {
+                if (tile.TileType == TileType.Capital)
+                {
+                    return tile.Position;
+                }  
+            }
+            return Vector2Int.zero;
         }
 
         private bool IsInPlayableGrid(int fogX, int fogY)

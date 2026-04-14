@@ -12,8 +12,8 @@ namespace Project.Scripts.Grid
     {
         private static readonly int Disperse = Animator.StringToHash("Disperse");
         private static readonly int Return = Animator.StringToHash("Return");
-        
-        
+
+
         [SerializeField] private GameObject _buildingMesh;
         [SerializeField] private GameObject _biomMesh;
         [SerializeField] private GameObject _fog;
@@ -29,7 +29,6 @@ namespace Project.Scripts.Grid
         [SerializeField] private AudioSource sfxAudioSource;
 
 
-        
         public bool IsUnderFog;
         public bool HasBuilding;
         public bool Selected;
@@ -40,13 +39,14 @@ namespace Project.Scripts.Grid
         private Vector2Int _position;
         private AnimationEventReceiver _receiver;
 
-        private TileType _tileType=TileType.Forest;
+        private TileType _tileType = TileType.Forest;
 
 
         public float _fireStickDeltaTime;
 
         public float _productionDeltaTime;
         public TileType TileType => _tileType;
+        public Vector2Int Position => _position;
         public float _consumesDeltaTime;
         private BuildingConfig _buildingConfig;
         private FieldGrid _grid;
@@ -55,10 +55,10 @@ namespace Project.Scripts.Grid
 
         private void Awake()
         {
-            _receiver=animator.GetComponent<AnimationEventReceiver>();
+            _receiver = animator.GetComponent<AnimationEventReceiver>();
         }
 
-        public void Setup(FieldGrid grid,Vector2Int position, TileType tileType)
+        public void Setup(FieldGrid grid, Vector2Int position, TileType tileType)
         {
             _grid = grid;
             _position = position;
@@ -69,8 +69,8 @@ namespace Project.Scripts.Grid
             if (_tileType is TileType.Capital)
             {
                 animator.SetTrigger(Disperse);
-
             }
+
             UpdateView();
             ResetTimes();
         }
@@ -128,11 +128,11 @@ namespace Project.Scripts.Grid
 
         private void TickTimes(float deltaTime)
         {
-            if(!GameplayManager.Instance.GameInProcess) return;
+            if (!GameplayManager.Instance.GameInProcess) return;
             TickTorch(deltaTime);
 
 
-            if (HasBuilding||_tileType is TileType.Capital)
+            if (HasBuilding || _tileType is TileType.Capital)
             {
                 bool haveResources = true;
 
@@ -146,14 +146,17 @@ namespace Project.Scripts.Grid
             if (_buildingConfig.Produces != null)
             {
                 _productionDeltaTime += deltaTime;
-                if (_productionDeltaTime > _buildingConfig.Produces.IntervalSeconds&&_buildingConfig.Produces.IntervalSeconds>0)
+                if (_productionDeltaTime > _buildingConfig.Produces.IntervalSeconds &&
+                    _buildingConfig.Produces.IntervalSeconds > 0)
                 {
                     _productionDeltaTime = 0;
                     if (haveResources)
                     {
                         GameplayManager.Instance.AddResource(_buildingConfig.Produces.ResourceType,
                             _buildingConfig.Produces.Amount);
-                        _tileUIView.AnimationsHolder.PlayAnimation("+"+_buildingConfig.Produces.Amount,_tileUIView.GetIcon(_buildingConfig.Produces.ResourceType),GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Produces.ResourceType));
+                        _tileUIView.AnimationsHolder.PlayAnimation("+" + _buildingConfig.Produces.Amount,
+                            _tileUIView.GetIcon(_buildingConfig.Produces.ResourceType),
+                            GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Produces.ResourceType));
                     }
                 }
             }
@@ -161,11 +164,12 @@ namespace Project.Scripts.Grid
 
         private bool TickConsumes(float deltaTime)
         {
-            bool haveResources=true;
+            bool haveResources = true;
             if (_buildingConfig.Consumes != null)
             {
                 _consumesDeltaTime += deltaTime;
-                if (_consumesDeltaTime > _buildingConfig.Consumes.IntervalSeconds&&_buildingConfig.Consumes.IntervalSeconds>0)
+                if (_consumesDeltaTime > _buildingConfig.Consumes.IntervalSeconds &&
+                    _buildingConfig.Consumes.IntervalSeconds > 0)
                 {
                     _consumesDeltaTime = 0;
 
@@ -174,15 +178,17 @@ namespace Project.Scripts.Grid
                     {
                         GameplayManager.Instance.RemoveResource(_buildingConfig.Consumes.ResourceType,
                             _buildingConfig.Consumes.Amount);
-                        _tileUIView.AnimationsHolder.PlayAnimation("-"+_buildingConfig.Consumes.Amount,_tileUIView.GetIcon(_buildingConfig.Produces.ResourceType),GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Consumes.ResourceType));
-
+                        _tileUIView.AnimationsHolder.PlayAnimation("-" + _buildingConfig.Consumes.Amount,
+                            _tileUIView.GetIcon(_buildingConfig.Produces.ResourceType),
+                            GameplayManager.Instance.colorsConfig.GetTileColor(_buildingConfig.Consumes.ResourceType));
                     }
                     else
                     {
-                        if (_buildingConfig.Consumes.ResourceType==ResourceType.Food)
+                        if (_buildingConfig.Consumes.ResourceType == ResourceType.Food)
                         {
                             GameplayManager.Instance.FinishGame(GameResult.LoseNoFood);
                         }
+
                         haveResources = false;
                     }
                 }
@@ -200,8 +206,10 @@ namespace Project.Scripts.Grid
                 _tileUIView.UpdateTorchBar((torchDuration - _fireStickDeltaTime) / torchDuration);
                 if (_tileType is TileType.Capital)
                 {
-                    GameplayManager.Instance.LightHouseIndicator.Tick((torchDuration - _fireStickDeltaTime) / torchDuration);
+                    GameplayManager.Instance.LightHouseIndicator.Tick((torchDuration - _fireStickDeltaTime) /
+                                                                      torchDuration);
                 }
+
                 if (_fireStickDeltaTime >= torchDuration)
                 {
                     _fireStickDeltaTime = torchDuration;
@@ -232,7 +240,7 @@ namespace Project.Scripts.Grid
 
         private void OnMouseEnter()
         {
-            if (CanClick()||!IsCloseToOther()) return;
+            if (CanClick() || !IsCloseToOther()) return;
 
             _outline.SetActive(true);
             // Debug.Log($" En  OnMouseOver {_position} {_tileType}");
@@ -240,15 +248,16 @@ namespace Project.Scripts.Grid
 
         private void OnMouseDown()
         {
-            if (CanClick()||!IsCloseToOther()) return;
+            if (CanClick() || !IsCloseToOther()) return;
             if (Selected)
             {
                 ClearSelection();
                 return;
             }
+
             Debug.Log($"Mouse Down {_position} {_tileType}");
-            
-            _tileUIView.ActionsHolder.gameObject.SetActive(true);
+
+            _tileUIView.StartAppearAnimation();
             _tileUIView.Setup(IsUnderFog, HasBuilding);
             OnClicked?.Invoke(this);
             Selected = true;
@@ -256,21 +265,20 @@ namespace Project.Scripts.Grid
 
         private static bool CanClick()
         {
-            
-                if (Input.touchCount > 0)
-                    return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-    
-                return EventSystem.current.IsPointerOverGameObject();
-            
+            if (Input.touchCount > 0)
+                return EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
+
+            return EventSystem.current.IsPointerOverGameObject();
         }
 
         private bool IsCloseToOther()
         {
-            if(!IsUnderFog) return true;
+            if (!IsUnderFog) return true;
             Vector2Int currentPosition = _position;
             FieldTile[,] grid = _grid.Grid;
 
-            Vector2Int[] neighbors = {
+            Vector2Int[] neighbors =
+            {
                 new Vector2Int(currentPosition.x - 1, currentPosition.y),
                 new Vector2Int(currentPosition.x + 1, currentPosition.y),
                 new Vector2Int(currentPosition.x, currentPosition.y - 1),
@@ -291,8 +299,8 @@ namespace Project.Scripts.Grid
 
         public void ClearSelection()
         {
-            _tileUIView.ActionsHolder.gameObject.SetActive(false);
-            
+            _tileUIView.StopAppearAnimation();
+
             Selected = false;
         }
 
@@ -300,14 +308,13 @@ namespace Project.Scripts.Grid
         {
             //Play sfx audio
             PlayAudioClipFromArray(new[] { torch1, torch2 });
-
             ResetTorch();
-
         }
 
-        public void PlaceTorch()
+        public void PlaceTorch(bool withSound=true)
         {
             //Play sfx audio
+            if (withSound)
             PlayAudioClipFromArray(new[] { torch1, torch2 });
 
             ResetTimes();
@@ -321,17 +328,17 @@ namespace Project.Scripts.Grid
         private void ReturnFog()
         {
             IsUnderFog = true;
-            if(GameplayManager.Instance.gameConfig.CanFogDestroyBuildings)
+            if (GameplayManager.Instance.gameConfig.CanFogDestroyBuildings)
             {
                 HasBuilding = false;
             }
+
             StartAnimation(Return);
             PlayAudioClip(burnedOutFire);
 
             if (_tileType == TileType.Capital)
             {
                 GameplayManager.Instance.FinishGame(GameResult.LoseLighthouseLightWentOut);
-
             }
         }
 
@@ -382,12 +389,10 @@ namespace Project.Scripts.Grid
         {
             if (IsUnderFog)
             {
-
                 _fog.SetActive(true);
                 _buildingMesh.SetActive(false);
                 _biomMesh.SetActive(false);
                 _tileUIView.TorchHolder.gameObject.SetActive(false);
-
             }
             else
             {

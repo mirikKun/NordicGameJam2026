@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using Project.Scripts.Animation;
 using Project.Scripts.Gameplay.Configs;
 using UnityEngine;
@@ -15,9 +16,12 @@ namespace Project.Scripts.Grid.TileUI
         [SerializeField] private FieldTile _fieldTile;
         [SerializeField] private PriceView _prefab;
 
-        [Header("Place torch")] [SerializeField]
-        private RectTransform _placeTorchRoot;
+        [Header("Actions Animation")]
 
+        [SerializeField] private float _animationDuration;
+        [SerializeField] private AnimationCurve _animationCurve;
+        [Header("Place torch")]
+        [SerializeField] private RectTransform _placeTorchRoot;
         [SerializeField] private RectTransform _placeTorchPrice;
         [SerializeField] private Button _placeTorchButton;
 
@@ -31,14 +35,12 @@ namespace Project.Scripts.Grid.TileUI
         [SerializeField] private RectTransform _refillTorchPrice;
         [SerializeField] private Button _refillTorchButton;
         [Header("Torch")] 
-        [SerializeField] private Image _torch; 
+        [SerializeField] private LightHouseIndicator _torch; 
 
 
         [SerializeField] private ResIcon[] _resIcons;
-
-     
-    
-
+        private Coroutine _animationCoroutine;
+        
         public Sprite GetIcon(ResourceType res)
         {
             foreach (ResIcon resIcon in _resIcons)
@@ -87,7 +89,7 @@ namespace Project.Scripts.Grid.TileUI
 
         public void UpdateTorchBar(float percentage)
         {
-            _torch.fillAmount = percentage;
+            _torch.Tick(percentage);
         }
 
         private void TryPlaceTorch()
@@ -134,12 +136,38 @@ namespace Project.Scripts.Grid.TileUI
             }
         }
 
-   
+        public void StartAppearAnimation()
+        {
+            StopAppearAnimation();
+            _animationCoroutine = StartCoroutine(AppearAnimation());
+        }
+
+        public void StopAppearAnimation()
+        {
+            ActionsHolder.gameObject.SetActive(false);
+
+            if (_animationCoroutine != null)
+            {
+                StopCoroutine(_animationCoroutine);
+            }
+        }
+
+        private IEnumerator AppearAnimation()
+        {
+            ActionsHolder.localScale = Vector3.zero;
+            yield return null;
+            ActionsHolder.gameObject.SetActive(true);
+            float elapsedTime = 0;
+            while (elapsedTime < _animationDuration)
+            {
+                elapsedTime += Time.deltaTime;
+                ActionsHolder.localScale=Vector3.one*_animationCurve.Evaluate(elapsedTime/_animationDuration);
+                yield return null;
+            }
+            ActionsHolder.localScale = Vector3.one;
+        }
     }
-
-
-
-
+    
     [Serializable]
     public class ResIcon
     {
